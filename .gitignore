@@ -1,0 +1,25 @@
+# Logs, debugging
+logs/
+*.log
+
+# Cache
+.cache/
+
+# IDE/editor
+.vscode/
+
+# Virtual environments
+venv/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# api keys and secrets
+.env
+.key
+.pem
+.ctr
+
+# Python bytecode
+__pycache__/

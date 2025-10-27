@@ -1,0 +1,8 @@
+# requirements.txt
+# Python=3.11
+pandas>=2.2,<3.0
+seaborn>=0.13,<0.14
+matplotlib>=3.8,<3.10
+tensorflow>=2.16,<2.18
+scikit-learn>=1.4,<1.6
+xgboost>=2.0,<3.0
