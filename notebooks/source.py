@@ -118,7 +118,7 @@ def merge_csv(folder_path=".", output_file="diem_thi_toan_quoc.csv"):
 def crawl_tinh_path(start_tinh=1, end_tinh=10): 
     for id_tinh in range(start_tinh, end_tinh+1): 
         ma_tinh_str = f"{id_tinh:02d}"
-        crawl_tinh(ma_tinh_str,100,200)
+        crawl_tinh(ma_tinh_str)
         print(f"Đã xong tỉnh {ma_tinh_str}")
         time.sleep(3) 
 
