@@ -1,0 +1,647 @@
+→ Đã có 428 dòng trong ../data/diem_chuan_all.csv (sẽ bỏ qua nếu trùng).
+[0] Crawling KHA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-quoc-dan-KHA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  (Không có dòng mới sau khi loại trùng)
+[1] Crawling BKA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-bach-khoa-ha-noi-BKA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 473 dòng vào ../data/diem_chuan_all.csv
+[2] Crawling HTC -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-tai-chinh-HTC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 108 dòng vào ../data/diem_chuan_all.csv
+[3] Crawling NHH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ngan-hang-NHH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 160 dòng vào ../data/diem_chuan_all.csv
+[4] Crawling NTH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngoai-thuong-co-so-phia-bac-NTH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 124 dòng vào ../data/diem_chuan_all.csv
+[5] Crawling QSB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-bach-khoa-hcm-QSB.html
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ⚠️ Không tìm thấy bảng 'Điểm thi THPT' 2019–2025 cho trường này.
+[6] Crawling YHB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-ha-noi-YHB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 96 dòng vào ../data/diem_chuan_all.csv
+[7] Crawling BVH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-cong-nghe-buu-chinh-vien-thong-phia-bac-BVH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 111 dòng vào ../data/diem_chuan_all.csv
+[8] Crawling SPH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ha-noi-SPH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 457 dòng vào ../data/diem_chuan_all.csv
+[9] Crawling TMU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thuong-mai-TMU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 202 dòng vào ../data/diem_chuan_all.csv
+[10] Crawling SPS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-tphcm-SPS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 285 dòng vào ../data/diem_chuan_all.csv
+[11] Crawling YDS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-tphcm-YDS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 134 dòng vào ../data/diem_chuan_all.csv
+[12] Crawling QHI -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-dai-hoc-quoc-gia-ha-noi-QHI.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 104 dòng vào ../data/diem_chuan_all.csv
+[13] Crawling HNM -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thu-do-ha-noi-HNM.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 189 dòng vào ../data/diem_chuan_all.csv
+[14] Crawling GHA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-giao-thong-van-tai-co-so-phia-bac-GHA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 275 dòng vào ../data/diem_chuan_all.csv
+[15] Crawling YTB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-thai-binh-YTB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 40 dòng vào ../data/diem_chuan_all.csv
+[16] Crawling KMA -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ky-thuat-mat-ma-KMA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 28 dòng vào ../data/diem_chuan_all.csv
+[17] Crawling DCN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghiep-ha-noi-DCN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 318 dòng vào ../data/diem_chuan_all.csv
+[18] Crawling YPB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-hai-phong-YPB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 66 dòng vào ../data/diem_chuan_all.csv
+[19] Crawling IUH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghiep-tphcm-IUH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 414 dòng vào ../data/diem_chuan_all.csv
+[20] Crawling HPN -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-phu-nu-viet-nam-HPN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 79 dòng vào ../data/diem_chuan_all.csv
+[21] Crawling DKH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-duoc-ha-noi-DKH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 21 dòng vào ../data/diem_chuan_all.csv
+[22] Crawling ANH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-an-ninh-nhan-dan-ANH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 47 dòng vào ../data/diem_chuan_all.csv
+[23] Crawling DKY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ky-thuat-y-te-hai-duong-DKY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 39 dòng vào ../data/diem_chuan_all.csv
+[24] Crawling GTS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-giao-thong-van-tai-tphcm-GTS.html
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ⚠️ Không tìm thấy bảng 'Điểm thi THPT' 2019–2025 cho trường này.
+[25] Crawling HYD -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-y-duoc-hoc-co-truyen-viet-nam-HYD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 21 dòng vào ../data/diem_chuan_all.csv
+[26] Crawling CSH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-canh-sat-nhan-dan-CSH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 26 dòng vào ../data/diem_chuan_all.csv
+[27] Crawling DKK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-ky-thuat-cong-nghiep-DKK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 228 dòng vào ../data/diem_chuan_all.csv
+[28] Crawling DCT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-thuong-tphcm-DCT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 224 dòng vào ../data/diem_chuan_all.csv
+[29] Crawling LAH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-luc-quan-1-dai-hoc-tran-quoc-tuan-LAH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 11 dòng vào ../data/diem_chuan_all.csv
+[30] Crawling HQH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-hai-quan-HQH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 13 dòng vào ../data/diem_chuan_all.csv
+[31] Crawling HHK -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-hang-khong-viet-nam-HHK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 85 dòng vào ../data/diem_chuan_all.csv
+[32] Crawling PKA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phenikaa-PKA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 263 dòng vào ../data/diem_chuan_all.csv
+[33] Crawling PKH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-phong-khong-khong-quan-PKH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 17 dòng vào ../data/diem_chuan_all.csv
+[34] Crawling CSS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-canh-sat-nhan-dan-CSS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 26 dòng vào ../data/diem_chuan_all.csv
+[35] Crawling TTH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-thong-tin-he-quan-su-dai-hoc-thong-tin-lien-lac-TTH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 10 dòng vào ../data/diem_chuan_all.csv
+[36] Crawling NHF -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ha-noi-NHF.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 175 dòng vào ../data/diem_chuan_all.csv
+[37] Crawling KQH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ky-thuat-quan-su-he-quan-su-KQH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 16 dòng vào ../data/diem_chuan_all.csv
+[38] Crawling YTC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-te-cong-cong-YTC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 42 dòng vào ../data/diem_chuan_all.csv
+[39] Crawling HQT -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ngoai-giao-HQT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 60 dòng vào ../data/diem_chuan_all.csv
+[40] Crawling ANS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-an-ninh-nhan-dan-ANS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 25 dòng vào ../data/diem_chuan_all.csv
+[41] Crawling YCT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-can-tho-YCT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 71 dòng vào ../data/diem_chuan_all.csv
+[42] Crawling TDM -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thu-dau-mot-TDM.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 294 dòng vào ../data/diem_chuan_all.csv
+[43] Crawling TYS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-khoa-pham-ngoc-thach-TYS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 118 dòng vào ../data/diem_chuan_all.csv
+[44] Crawling DTL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thang-long-DTL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 153 dòng vào ../data/diem_chuan_all.csv
+[45] Crawling TLA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thuy-loi-co-so-1-TLA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 238 dòng vào ../data/diem_chuan_all.csv
+[46] Crawling QST -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-tu-nhien-tphcm-QST.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 188 dòng vào ../data/diem_chuan_all.csv
+[47] Crawling VHH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-van-hoa-ha-noi-VHH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 139 dòng vào ../data/diem_chuan_all.csv
+[48] Crawling DTT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ton-duc-thang-DTT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 640 dòng vào ../data/diem_chuan_all.csv
+[49] Crawling HVN -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-nong-nghiep-viet-nam-HVN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 228 dòng vào ../data/diem_chuan_all.csv
+[50] Crawling QHX -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-xa-hoi-va-nhan-van-ha-noi-QHX.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 229 dòng vào ../data/diem_chuan_all.csv
+[51] Crawling LPH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-luat-ha-noi-LPH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 36 dòng vào ../data/diem_chuan_all.csv
+[52] Crawling QHF -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngoai-ngu-ha-noi-QHF.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 101 dòng vào ../data/diem_chuan_all.csv
+[53] Crawling HBT -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-bao-chi-va-tuyen-truyen-HBT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 261 dòng vào ../data/diem_chuan_all.csv
+[54] Crawling QHT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-tu-nhien-dai-hoc-quoc-gia-ha-noi-QHT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 198 dòng vào ../data/diem_chuan_all.csv
+[55] Crawling QHE -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-ha-noi-QHE.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 46 dòng vào ../data/diem_chuan_all.csv
+[56] Crawling QSX -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-xa-hoi-va-nhan-van-tphcm-QSX.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 299 dòng vào ../data/diem_chuan_all.csv
+[57] Crawling DTS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-thai-nguyen-DTS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 119 dòng vào ../data/diem_chuan_all.csv
+[58] Crawling LCH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-chinh-tri-dai-hoc-chinh-tri-LCH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 14 dòng vào ../data/diem_chuan_all.csv
+[59] Crawling TCT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-can-tho-TCT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 711 dòng vào ../data/diem_chuan_all.csv
+[60] Crawling DKS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kiem-sat-DKS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 33 dòng vào ../data/diem_chuan_all.csv
+[61] Crawling BPH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-bien-phong-BPH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 40 dòng vào ../data/diem_chuan_all.csv
+[62] Crawling QHL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-luat-dai-hoc-quoc-gia-ha-noi-QHL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 28 dòng vào ../data/diem_chuan_all.csv
+[63] Crawling DHS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-hue-DHS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 173 dòng vào ../data/diem_chuan_all.csv
+[64] Crawling QSC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-thong-tin-dhqg-tphcm-QSC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 113 dòng vào ../data/diem_chuan_all.csv
+[65] Crawling SGD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-sai-gon-SGD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 286 dòng vào ../data/diem_chuan_all.csv
+[66] Crawling NQH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-khoa-hoc-quan-su-he-quan-su-NQH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 46 dòng vào ../data/diem_chuan_all.csv
+[67] Crawling NTS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngoai-thuong-co-so-phia-nam-NTS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 22 dòng vào ../data/diem_chuan_all.csv
+[68] Crawling HTA -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-toa-an-HTA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 13 dòng vào ../data/diem_chuan_all.csv
+[69] Crawling DDS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-dai-hoc-da-nang-DDS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 240 dòng vào ../data/diem_chuan_all.csv
+[70] Crawling SP2 -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ha-noi-2-SP2.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 141 dòng vào ../data/diem_chuan_all.csv
+[71] Crawling QHS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-giao-duc-ha-noi-QHS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 39 dòng vào ../data/diem_chuan_all.csv
+[72] Crawling VHS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-van-hoa-tphcm-VHS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 98 dòng vào ../data/diem_chuan_all.csv
+[73] Crawling SPK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ky-thuat-tphcm-SPK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 563 dòng vào ../data/diem_chuan_all.csv
+[74] Crawling HTN -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-thanh-thieu-nien-viet-nam-HTN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 53 dòng vào ../data/diem_chuan_all.csv
+[75] Crawling YQH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-quan-y-he-quan-su-YQH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 32 dòng vào ../data/diem_chuan_all.csv
+[76] Crawling QSK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-luat-tphcm-QSK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 270 dòng vào ../data/diem_chuan_all.csv
+[77] Crawling HEH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-hau-can-he-quan-su-HEH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 20 dòng vào ../data/diem_chuan_all.csv
+[78] Crawling LPS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-luat-tphcm-LPS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 37 dòng vào ../data/diem_chuan_all.csv
+[79] Crawling DDF -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngoai-ngu-da-nang-DDF.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 113 dòng vào ../data/diem_chuan_all.csv
+[80] Crawling KSA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-tphcm-KSA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 276 dòng vào ../data/diem_chuan_all.csv
+[81] Crawling QHY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-dai-hoc-quoc-gia-ha-noi-QHY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 40 dòng vào ../data/diem_chuan_all.csv
+[82] Crawling DDK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-bach-khoa-da-nang-DDK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 265 dòng vào ../data/diem_chuan_all.csv
+[83] Crawling DHF -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngoai-ngu-hue-DHF.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 79 dòng vào ../data/diem_chuan_all.csv
+[84] Crawling DMS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tai-chinh-marketing-DMS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 155 dòng vào ../data/diem_chuan_all.csv
+[85] Crawling GSA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-giao-thong-van-tai-co-so-phia-nam-GSA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 130 dòng vào ../data/diem_chuan_all.csv
+[86] Crawling TSN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-nha-trang-TSN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 277 dòng vào ../data/diem_chuan_all.csv
+[87] Crawling LBH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-luc-quan-2-dai-hoc-nguyen-hue-LBH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 19 dòng vào ../data/diem_chuan_all.csv
+[88] Crawling BVS -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-cong-nghe-buu-chinh-vien-thong-phia-nam-BVS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 70 dòng vào ../data/diem_chuan_all.csv
+[89] Crawling YKV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-khoa-vinh-YKV.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 40 dòng vào ../data/diem_chuan_all.csv
+[90] Crawling YDN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ky-thuat-y-duoc-da-nang-YDN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 62 dòng vào ../data/diem_chuan_all.csv
+[91] Crawling DTY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-thai-nguyen-DTY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 53 dòng vào ../data/diem_chuan_all.csv
+[92] Crawling DHY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-y-duoc-hue-DHY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 78 dòng vào ../data/diem_chuan_all.csv
+[93] Crawling DDY -> https://diemthi.tuyensinh247.com/diem-chuan/truong-y-duoc-da-nang-DDY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 35 dòng vào ../data/diem_chuan_all.csv
+[94] Crawling KTS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kien-truc-tphcm-KTS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 139 dòng vào ../data/diem_chuan_all.csv
+[95] Crawling HCA -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-chinh-tri-cong-an-nhan-dan-HCA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 12 dòng vào ../data/diem_chuan_all.csv
+[96] Crawling QSY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-suc-khoe-tphcm-QSY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 39 dòng vào ../data/diem_chuan_all.csv
+[97] Crawling QSQ -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-quoc-te-dhqg-tphcm-QSQ.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 192 dòng vào ../data/diem_chuan_all.csv
+[98] Crawling THV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-hung-vuong-THV.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 162 dòng vào ../data/diem_chuan_all.csv
+[99] Crawling THP -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-hai-phong-THP.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 193 dòng vào ../data/diem_chuan_all.csv
+[100] Crawling HCP -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-chinh-sach-va-phat-trien-HCP.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 75 dòng vào ../data/diem_chuan_all.csv
+[101] Crawling MHN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-mo-ha-noi-MHN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 135 dòng vào ../data/diem_chuan_all.csv
+[102] Crawling LDA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-doan-LDA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 79 dòng vào ../data/diem_chuan_all.csv
+[103] Crawling HHA -> https://diemthi.tuyensinh247.com/diem-chuan/-HHA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 331 dòng vào ../data/diem_chuan_all.csv
+[104] Crawling KTA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kien-truc-ha-noi-KTA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 162 dòng vào ../data/diem_chuan_all.csv
+[105] Crawling TDV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-vinh-TDV.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 377 dòng vào ../data/diem_chuan_all.csv
+[106] Crawling QSA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-an-giang-QSA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 256 dòng vào ../data/diem_chuan_all.csv
+[107] Crawling HCH -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-hanh-chinh-va-quan-tri-cong-HCH.html
+  🔁 Các năm thấy: [2025, 2024, 2023]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 63 dòng vào ../data/diem_chuan_all.csv
+[108] Crawling SPD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-dong-thap-SPD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 273 dòng vào ../data/diem_chuan_all.csv
+[109] Crawling QHK -> https://diemthi.tuyensinh247.com/diem-chuan/truong-khoa-hoc-lien-nganh-va-nghe-thuat-ha-noi-QHK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 26 dòng vào ../data/diem_chuan_all.csv
+[110] Crawling TTN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tay-nguyen-TTN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 252 dòng vào ../data/diem_chuan_all.csv
+[111] Crawling DQN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-quy-nhon-DQN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 339 dòng vào ../data/diem_chuan_all.csv
+[112] Crawling DHC -> https://diemthi.tuyensinh247.com/diem-chuan/khoa-giao-duc-the-chat-hue-DHC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 7 dòng vào ../data/diem_chuan_all.csv
+[113] Crawling GNT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-nghe-thuat-trung-uong-GNT.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 17 dòng vào ../data/diem_chuan_all.csv
+[114] Crawling DDQ -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-dai-hoc-da-nang-DDQ.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 129 dòng vào ../data/diem_chuan_all.csv
+[115] Crawling DTF -> https://diemthi.tuyensinh247.com/diem-chuan/truong-ngoai-ngu-thai-nguyen-DTF.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 36 dòng vào ../data/diem_chuan_all.csv
+[116] Crawling HLU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ha-long-HLU.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 48 dòng vào ../data/diem_chuan_all.csv
+[117] Crawling DKT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-hai-duong-DKT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 103 dòng vào ../data/diem_chuan_all.csv
+[118] Crawling DQB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-quang-binh-DQB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 129 dòng vào ../data/diem_chuan_all.csv
+[119] Crawling DPQ -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-pham-van-dong-DPQ.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 107 dòng vào ../data/diem_chuan_all.csv
+[120] Crawling HHT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ha-tinh-HHT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 125 dòng vào ../data/diem_chuan_all.csv
+[121] Crawling DMT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tai-nguyen-va-moi-truong-ha-noi-DMT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 199 dòng vào ../data/diem_chuan_all.csv
+[122] Crawling HCS -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-hanh-chinh-va-quan-tri-cong-phia-nam-HCS.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 18 dòng vào ../data/diem_chuan_all.csv
+[123] Crawling NHS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ngan-hang-tphcm-NHS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 92 dòng vào ../data/diem_chuan_all.csv
+[124] Crawling DLX -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-lao-dong-xa-hoi-co-so-ha-noi-DLX.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 88 dòng vào ../data/diem_chuan_all.csv
+[125] Crawling DBL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-bac-lieu-DBL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 83 dòng vào ../data/diem_chuan_all.csv
+[126] Crawling DQU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-quang-nam-DQU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 87 dòng vào ../data/diem_chuan_all.csv
+[127] Crawling DLS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-lao-dong-xa-hoi-co-so-phia-nam-DLS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 69 dòng vào ../data/diem_chuan_all.csv
+[128] Crawling DPY -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phu-yen-DPY.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 66 dòng vào ../data/diem_chuan_all.csv
+[129] Crawling DDP -> https://diemthi.tuyensinh247.com/diem-chuan/phan-hieu-dai-hoc-da-nang-tai-kon-tum-DDP.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 57 dòng vào ../data/diem_chuan_all.csv
+[130] Crawling TDH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-the-duc-the-thao-ha-noi-TDH.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 2 dòng vào ../data/diem_chuan_all.csv
+[131] Crawling KCC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ky-thuat-cong-nghe-can-tho-KCC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 140 dòng vào ../data/diem_chuan_all.csv
+[132] Crawling QHQ -> https://diemthi.tuyensinh247.com/diem-chuan/truong-quoc-te-dai-hoc-quoc-gia-ha-noi-QHQ.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 70 dòng vào ../data/diem_chuan_all.csv
+[133] Crawling KCN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khoa-hoc-va-cong-nghe-ha-noi-KCN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 106 dòng vào ../data/diem_chuan_all.csv
+[134] Crawling DCV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghiep-vinh-DCV.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 52 dòng vào ../data/diem_chuan_all.csv
+[135] Crawling DVT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tra-vinh-DVT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 359 dòng vào ../data/diem_chuan_all.csv
+[136] Crawling NLS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-nong-lam-tphcm-NLS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 318 dòng vào ../data/diem_chuan_all.csv
+[137] Crawling HVC -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-can-bo-tphcm-HVC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 35 dòng vào ../data/diem_chuan_all.csv
+[138] Crawling XDA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-xay-dung-ha-noi-XDA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 211 dòng vào ../data/diem_chuan_all.csv
+[139] Crawling SKH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ky-thuat-hung-yen-SKH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 147 dòng vào ../data/diem_chuan_all.csv
+[140] Crawling MBS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-mo-tphcm-MBS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 274 dòng vào ../data/diem_chuan_all.csv
+[141] Crawling FBU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tai-chinh-ngan-hang-ha-noi-FBU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 51 dòng vào ../data/diem_chuan_all.csv
+[142] Crawling GTA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-giao-thong-van-tai-GTA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 271 dòng vào ../data/diem_chuan_all.csv
+[143] Crawling MDA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-mo-dia-chat-MDA.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 204 dòng vào ../data/diem_chuan_all.csv
+[144] Crawling DDL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-dien-luc-DDL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 153 dòng vào ../data/diem_chuan_all.csv
+[145] Crawling TDS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-the-duc-the-thao-tphcm-TDS.html
+  🔁 Các năm thấy: [2025, 2024, 2023]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 11 dòng vào ../data/diem_chuan_all.csv
+[146] Crawling DPD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phuong-dong-DPD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 124 dòng vào ../data/diem_chuan_all.csv
+[147] Crawling VLU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ky-thuat-vinh-long-VLU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 226 dòng vào ../data/diem_chuan_all.csv
+[148] Crawling KTD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kien-truc-da-nang-KTD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 115 dòng vào ../data/diem_chuan_all.csv
+[149] Crawling DQK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-doanh-va-cong-nghe-ha-noi-DQK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 182 dòng vào ../data/diem_chuan_all.csv
+[150] Crawling DTK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ky-thuat-cong-nghiep-thai-nguyen-DTK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 146 dòng vào ../data/diem_chuan_all.csv
+[151] Crawling STS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-the-duc-the-thao-tphcm-STS.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 4 dòng vào ../data/diem_chuan_all.csv
+[152] Crawling UKH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-khanh-hoa-UKH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 140 dòng vào ../data/diem_chuan_all.csv
+[153] Crawling DSK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-su-pham-ky-thuat-dai-hoc-da-nang-DSK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 128 dòng vào ../data/diem_chuan_all.csv
+[154] Crawling NHB -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ngan-hang-phan-vien-bac-ninh-NHB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 13 dòng vào ../data/diem_chuan_all.csv
+[155] Crawling DHI -> https://diemthi.tuyensinh247.com/diem-chuan/khoa-quoc-te-dai-hoc-hue-DHI.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 16 dòng vào ../data/diem_chuan_all.csv
+[156] Crawling CMC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cmc-CMC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 38 dòng vào ../data/diem_chuan_all.csv
+[157] Crawling NTT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-nguyen-tat-thanh-NTT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 372 dòng vào ../data/diem_chuan_all.csv
+[158] Crawling DHK -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-dai-hoc-hue-DHK.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 152 dòng vào ../data/diem_chuan_all.csv
+[159] Crawling DHD -> https://diemthi.tuyensinh247.com/diem-chuan/truong-du-lich-dai-hoc-hue-DHD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 48 dòng vào ../data/diem_chuan_all.csv
+[160] Crawling KGH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-khong-quan-he-dai-hoc-KGH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 13 dòng vào ../data/diem_chuan_all.csv
+[161] Crawling DTC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-thong-tin-va-truyen-thong-thai-nguyen-DTC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 181 dòng vào ../data/diem_chuan_all.csv
+[162] Crawling HGH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-phong-hoa-HGH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 9 dòng vào ../data/diem_chuan_all.csv
+[163] Crawling TGH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-siquan-tang-thiet-giap-TGH.html
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ⚠️ Không tìm thấy bảng 'Điểm thi THPT' 2019–2025 cho trường này.
+[164] Crawling HVQ -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-quan-ly-giao-duc-HVQ.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 22 dòng vào ../data/diem_chuan_all.csv
+[165] Crawling DDT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-duy-tan-DDT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 335 dòng vào ../data/diem_chuan_all.csv
+[166] Crawling DNC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-nam-can-tho-DNC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 239 dòng vào ../data/diem_chuan_all.csv
+[167] Crawling HIU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-quoc-te-hong-bang-HIU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 260 dòng vào ../data/diem_chuan_all.csv
+[168] Crawling TTU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tan-tao-TTU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 51 dòng vào ../data/diem_chuan_all.csv
+[169] Crawling TTD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-the-duc-the-thao-da-nang-TTD.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 3 dòng vào ../data/diem_chuan_all.csv
+[170] Crawling DCL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cuu-long-DCL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 193 dòng vào ../data/diem_chuan_all.csv
+[171] Crawling DVL -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-van-lang-DVL.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 364 dòng vào ../data/diem_chuan_all.csv
+[172] Crawling DPC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phan-chau-trinh-DPC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 38 dòng vào ../data/diem_chuan_all.csv
+[173] Crawling UKB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-bac-UKB.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 87 dòng vào ../data/diem_chuan_all.csv
+[174] Crawling ETU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-hoa-binh-ETU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 123 dòng vào ../data/diem_chuan_all.csv
+[175] Crawling DDN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-dai-nam-DDN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 172 dòng vào ../data/diem_chuan_all.csv
+[176] Crawling VTT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-vo-truong-toan-VTT.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 46 dòng vào ../data/diem_chuan_all.csv
+[177] Crawling DAD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-dong-a-DAD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 292 dòng vào ../data/diem_chuan_all.csv
+[178] Crawling SNH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-cong-binh-he-quan-su-dai-hoc-ngo-quyen-SNH.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 7 dòng vào ../data/diem_chuan_all.csv
+[179] Crawling DCH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-dac-cong-DCH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 9 dòng vào ../data/diem_chuan_all.csv
+[180] Crawling HCB -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ky-thuat-cong-nghe-an-ninh-phia-bac-HCB.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 16 dòng vào ../data/diem_chuan_all.csv
+[181] Crawling HCN -> https://diemthi.tuyensinh247.com/diem-chuan/hoc-vien-ky-thuat-va-cong-nghe-an-ninh-phia-nam-HCN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 16 dòng vào ../data/diem_chuan_all.csv
+[182] Crawling PBH -> https://diemthi.tuyensinh247.com/diem-chuan/truong-si-quan-phao-binh-PBH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 11 dòng vào ../data/diem_chuan_all.csv
+[183] Crawling KSV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-kinh-te-tphcm-phan-hieu-vinh-long-KSV.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 50 dòng vào ../data/diem_chuan_all.csv
+[184] Crawling QHD -> https://diemthi.tuyensinh247.com/diem-chuan/truong-quan-tri-va-kinh-doanh-dh-quoc-gia-ha-noi-QHD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 25 dòng vào ../data/diem_chuan_all.csv
+[185] Crawling VGU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-viet-duc-VGU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 55 dòng vào ../data/diem_chuan_all.csv
+[186] Crawling TLS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thuy-loi-co-so-2-TLS.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 31 dòng vào ../data/diem_chuan_all.csv
+[187] Crawling SDU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-sao-do-SDU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 99 dòng vào ../data/diem_chuan_all.csv
+[188] Crawling PCS -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phong-chay-chua-chay-phia-nam-PCS.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 10 dòng vào ../data/diem_chuan_all.csv
+[189] Crawling PCH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-phong-chay-chua-chay-phia-bac-PCH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 15 dòng vào ../data/diem_chuan_all.csv
+[190] Crawling NLN -> https://diemthi.tuyensinh247.com/diem-chuan/phan-hieu-dai-hoc-nong-lam-tphcm-tai-ninh-thuan-NLN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 52 dòng vào ../data/diem_chuan_all.csv
+[191] Crawling DTD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tay-do-DTD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 175 dòng vào ../data/diem_chuan_all.csv
+[192] Crawling DKC -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-tphcm-DKC.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 380 dòng vào ../data/diem_chuan_all.csv
+[193] Crawling DDU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-dong-do-DDU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 68 dòng vào ../data/diem_chuan_all.csv
+[194] Crawling DLH -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-lac-hong-DLH.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 153 dòng vào ../data/diem_chuan_all.csv
+[195] Crawling DDB -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thanh-dong-DDB.html
+  🔁 Các năm thấy: [2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 122 dòng vào ../data/diem_chuan_all.csv
+[196] Crawling DHA -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-luat-dai-hoc-hue-DHA.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 14 dòng vào ../data/diem_chuan_all.csv
+[197] Crawling DYD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-yersin-da-lat-DYD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 101 dòng vào ../data/diem_chuan_all.csv
+[198] Crawling TDD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-thanh-do-TDD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 81 dòng vào ../data/diem_chuan_all.csv
+[199] Crawling DBD -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-binh-duong-DBD.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 69 dòng vào ../data/diem_chuan_all.csv
+[200] Crawling DTV -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-luong-the-vinh-DTV.html
+  🔁 Các năm thấy: [2025, 2024]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 21 dòng vào ../data/diem_chuan_all.csv
+[201] Crawling VJU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-viet-nhat-ha-noi-VJU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021]
+  ⚠️ Chưa thấy năm 2019 — có thể trang không có dữ liệu cũ hoặc click bị chặn.
+  ✅ Lưu 27 dòng vào ../data/diem_chuan_all.csv
+[202] Crawling BVU -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-ba-ria-vung-tau-BVU.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 263 dòng vào ../data/diem_chuan_all.csv
+[203] Crawling DHN -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-nghe-thuat-hue-DHN.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 42 dòng vào ../data/diem_chuan_all.csv
+[204] Crawling MIT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-cong-nghe-mien-dong-MIT.html
+  🔁 Các năm thấy: [2025, 2024, 2023, 2022, 2021, 2020, 2019]
+  ✅ Lưu 98 dòng vào ../data/diem_chuan_all.csv
+[205] Crawling FPT -> https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-fpt-FPT.html
