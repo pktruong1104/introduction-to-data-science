@@ -1,11 +1,9 @@
-# src/crawl_diem_chuan_thpt.py
 from pathlib import Path
 import time
 import re
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# Selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -207,17 +205,18 @@ def _parse_thpt_tables_exact(html, school_code):
     return results
 
 
+def _norm_tohop(s: str) -> str:
+    s = (s or "").upper()
+    s = re.sub(r"\s+", "", s)
+    parts = re.split(r"[;,/|]+", s)
+    parts = [p for p in parts if p]
+    if not parts:
+        return ""
+    return ";".join(sorted(set(parts)))
+
+
 def crawl_diem_thpt_from_df(df_schools, start=0, end=None, out_csv=None, headless=True,
                             pause_between=0.8, dedupe=True):
-    """
-    Crawl only 'Điểm thi THPT' tables (years 2019..2025) from df_schools (must have columns 'Mã trường' and 'Link').
-    - start, end: slice indices (end exclusive)
-    - out_csv: path to append CSV (default: data/diem_chuan_thpt_2019_2025.csv)
-    - headless: run headless browser
-    - pause_between: seconds between schools
-    - dedupe: if True, skip rows already present in out_csv (by the 4-field key)
-    Returns DataFrame of rows crawled in this run (after dedupe).
-    """
     project_root = Path(__file__).resolve().parent.parent
     default_out = project_root / "data" / "diem_chuan_thpt_2019_2025.csv"
     out_csv = Path(out_csv) if out_csv else default_out
@@ -233,12 +232,15 @@ def crawl_diem_thpt_from_df(df_schools, start=0, end=None, out_csv=None, headles
             df_existing = pd.read_csv(out_csv, dtype=str)
             df_existing = df_existing.fillna("")
             for _, r in df_existing.iterrows():
-                key = (r.get("Mã trường", "").strip(),
-                       str(r.get("Năm xét tuyển", "")).strip(),
-                       r.get("Mã ngành", "").strip(),
-                       r.get("Tên ngành", "").strip())
+                key = (
+                    (r.get("Mã trường", "") or "").strip(),
+                    str(r.get("Năm xét tuyển", "")).strip(),
+                    (r.get("Mã ngành", "") or "").strip(),
+                    (r.get("Tên ngành", "") or "").strip(),
+                    _norm_tohop(r.get("Tổ hợp môn", "")),  # dùng bản chuẩn hóa
+                )
                 existing_keys.add(key)
-            print(f"→ Đã có {len(existing_keys)} dòng trong {out_csv} (sẽ bỏ qua nếu trùng).")
+            print(f"→ Đã có {len(existing_keys)} dòng trong {out_csv} (sẽ bỏ qua nếu trùng theo 5-field key).")
         except Exception as e:
             print("  ! Không thể đọc file output để dedupe:", e)
 
@@ -278,13 +280,16 @@ def crawl_diem_thpt_from_df(df_schools, start=0, end=None, out_csv=None, headles
                 print("  ⚠️ Không tìm thấy bảng 'Điểm thi THPT' 2019–2025 cho trường này.")
                 continue
 
-            # dedupe by 4-field key
+            # dedupe by 5-field key (thêm "Tổ hợp môn")
             new_rows = []
             for r in rows:
-                key = (r.get("Mã trường", "").strip(),
-                       str(r.get("Năm xét tuyển", "")).strip(),
-                       r.get("Mã ngành", "").strip(),
-                       r.get("Tên ngành", "").strip())
+                key = (
+                    (r.get("Mã trường", "") or "").strip(),
+                    str(r.get("Năm xét tuyển", "")).strip(),
+                    (r.get("Mã ngành", "") or "").strip(),
+                    (r.get("Tên ngành", "") or "").strip(),
+                    _norm_tohop(r.get("Tổ hợp môn", "")),
+                )
                 if dedupe and (key in existing_keys or key in seen_in_run):
                     continue
                 new_rows.append(r)
