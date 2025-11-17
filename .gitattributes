@@ -1,0 +1,8 @@
+*.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2025_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2024_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2023_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2022_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2021_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2020_new.csv filter=lfs diff=lfs merge=lfs -text
+diem_thi_2019_new.csv filter=lfs diff=lfs merge=lfs -text
