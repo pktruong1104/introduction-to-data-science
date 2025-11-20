@@ -10,13 +10,13 @@ CUC_NAM, CUC_BAC, CUC_DONG, CUC_TAY = 8, 24, 110, 102
 STEP = 0.5
 
 FILE_PATHS_NEW = [
-    'diem_thi_2019_new.csv',
-    # 'diem_thi_2020_new.csv',
-    # 'diem_thi_2021_new.csv',
-    # 'diem_thi_2022_new.csv',
-    # 'diem_thi_2023_new.csv',
-    # 'diem_thi_2024_new.csv',
-    # 'diem_thi_2025_new.csv'
+    '../data/diem_thi_2019_new.csv',
+    '../data/diem_thi_2020_new.csv',
+    '../data/diem_thi_2021_new.csv',
+    '../data/diem_thi_2022_new.csv',
+    '../data/diem_thi_2023_new.csv',
+    '../data/diem_thi_2024_new.csv',
+    '../data/diem_thi_2025_new.csv'
 ]
 
 # =================== TẠO GRID CHO TỈNH =====================
@@ -44,15 +44,15 @@ def get_top2_fast(df):
 # ========================= DATA PREPROCESSING ============================
 def process_files_vectorized():
     print("Đang load dữ liệu tỉnh...")
-    pd_province = pd.read_csv('province.csv')
+    pd_province = pd.read_csv('../data/province.csv')
     pd_province_grid = create_grid_table(pd_province)
 
-    with open('to_hop_cu.json', 'r', encoding='utf-8') as f:
+    with open('../data/to_hop_cu.json', 'r', encoding='utf-8') as f:
         to_hop_cu = json.load(f)
-    with open('to_hop_moi.json', 'r', encoding='utf-8') as f:
+    with open('../data/to_hop_moi.json', 'r', encoding='utf-8') as f:
         to_hop_moi = json.load(f)
 
-    output_dir = "province_data"
+    output_dir = "."
     os.makedirs(output_dir, exist_ok=True)
 
     # Dictionary để lưu data của tất cả các năm cho mỗi tỉnh
