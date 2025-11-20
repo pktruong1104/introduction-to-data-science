@@ -52,7 +52,7 @@ def process_files_vectorized():
     with open('../data/to_hop_moi.json', 'r', encoding='utf-8') as f:
         to_hop_moi = json.load(f)
 
-    output_dir = "."
+    output_dir = "../data/"
     os.makedirs(output_dir, exist_ok=True)
 
     # Dictionary để lưu data của tất cả các năm cho mỗi tỉnh
