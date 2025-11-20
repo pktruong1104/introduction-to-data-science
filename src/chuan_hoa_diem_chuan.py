@@ -133,24 +133,58 @@ def filter_major_full_years(df_clean):
 
     return df_final
 
-# Sinh cột Mã ngành_Khối
-def normalize_major_khoi(ma_nganh: str, tohop_norm: str) -> list[str]:
+def apply_major_khoi(df):
     """
-    Sinh mã ngành theo từng khối.
-    Nếu tổ hợp là: A00;A01;D01
-    Trả về: 7310101_A00, 7310101_A01, 7310101_D01
+    Chỉ tách thành mã ngành_khối khi:
+        - Cùng Mã trường
+        - Cùng Mã ngành
+        - Cùng Năm xét tuyển
+        - Có >= 2 tổ hợp môn
     """
-    if not ma_nganh:
-        return []
 
-    if not tohop_norm:
-        return [ma_nganh]   # không có khối → ngành đơn (7310101)
+    # Đếm số tổ hợp theo (Mã trường, Mã ngành, Năm xét tuyển)
+    group_counts = (
+        df.groupby(["Mã trường", "Mã ngành", "Năm xét tuyển"])["Tổ hợp môn"]
+        .nunique()
+    )
 
-    # Tách chuỗi tổ hợp thành danh sách các khối (A00, A01, D01)
-    khoi_list = [k.strip() for k in tohop_norm.split(";") if k.strip()]
+    # Những nhóm đa khối (>= 2 tổ hợp)
+    multi_keys = set(group_counts[group_counts > 1].index)
 
-    # Trả về danh sách đã ghép mã ngành và khối (7310101_A00, ...)
-    return [f"{ma_nganh}_{khoi}" for khoi in khoi_list]
+    result_rows = []
+
+    for _, r in df.iterrows():
+        key = (r["Mã trường"], r["Mã ngành"], r["Năm xét tuyển"])
+        khoi_list = str(r["Tổ hợp môn"]).split(";")
+
+        if key in multi_keys:
+            # → Ngành này NĂM NÀY có nhiều khối → tách ra
+            for khoi in khoi_list:
+                result_rows.append({
+                    **r.to_dict(),
+                    "Mã ngành": f"{r['Mã ngành']}_{khoi}",
+                    "Tổ hợp môn": khoi
+                })
+        else:
+            # → Không thỏa 4 điều kiện → giữ nguyên
+            result_rows.append(r.to_dict())
+
+    return pd.DataFrame(result_rows)
+
+
+def remove_whitespace_major(code: str) -> str:
+    """
+    Xóa tất cả khoảng trắng trong mã ngành.
+    
+    Args:
+        code (str): Mã ngành đầu vào.
+        
+    Returns:
+        str: Mã ngành đã loại bỏ tất cả khoảng trắng.
+    """
+    if not isinstance(code, str) or not code:
+        return code
+    return code.replace(" ", "")
 
 def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
     print(f"Đang đọc dữ liệu từ: {path_input}")
@@ -163,55 +197,50 @@ def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
     clean_rows = []
     current_base_id = ""
 
+    # 1) Chuẩn hóa dữ liệu từng dòng
     for _, r in df.iterrows():
         ma_raw = r.get("Mã ngành", "")
-
+        ma_raw = remove_whitespace_major(ma_raw) # Xóa khoảng trắng
         # Chuẩn hóa mã ngành
         ma_final, new_base = normalize_major_code_logic_substring(ma_raw, current_base_id)
         if new_base:
             current_base_id = new_base
 
         ten = r.get("Tên ngành", "")
-        tohop = r.get("Tổ hợp môn", "")
+        tohop = extract_to_hop(r.get("Tổ hợp môn", ""))
         score = r.get("Điểm chuẩn", "")
-        year_str = r.get("Năm xét tuyển", "")
         school = r.get("Mã trường", "")
         ghichu = r.get("Ghi chú", "")
 
-        # Tìm môn chính
+        # môn chính
         mon_chinh = detect_mon_chinh(ghichu)
-        # Chuẩn hóa tổ hợp môn kèm môn chính
-        tohop = extract_to_hop(tohop)
         tohop_norm = normalize_tohop(tohop, mon_chinh)
 
-        # Parse năm
-        y_match = re.search(r"20\d{2}", str(year_str))
+        # năm
+        y_match = re.search(r"20\d{2}", str(r.get("Năm xét tuyển", "")))
         year = int(y_match.group(0)) if y_match else 0
 
-        # --- NEW: chuẩn hóa thành nhiều dòng cho từng khối ---
-        ma_khoi_list = normalize_major_khoi(ma_final, tohop_norm)
+        clean_rows.append({
+            "Mã trường": school,
+            "Mã ngành": ma_final,
+            "Tên ngành": ten,
+            "Tổ hợp môn": tohop_norm,
+            "Điểm chuẩn": score,
+            "Năm xét tuyển": year,
+            "Ghi chú": ghichu,
+            "Môn chính": mon_chinh if mon_chinh else ""
+        })
 
-        for mk in ma_khoi_list:
-            if '_' in mk:
-                th = mk.split('_', 1)[1]
-            clean_rows.append({
-                "Mã trường": school,
-                "Mã ngành": ma_final,
-                "Mã ngành_Khối": mk,
-                "Tên ngành": ten,
-                "Tổ hợp môn": th,
-                "Điểm chuẩn": score,
-                "Năm xét tuyển": year,
-                "Ghi chú": ghichu,
-                "Môn chính": mon_chinh if mon_chinh else ""
-            })
-
+    # tạo DataFrame chuẩn hóa bước 1
     df_clean = pd.DataFrame(clean_rows)
 
+    # Lọc ngành có điểm từ 2019–2025
     print("Đang lọc dữ liệu đủ 7 năm (2019-2025)...")
-    df_final = filter_major_full_years(df_clean)
+    df_clean = filter_major_full_years(df_clean)
 
-    # Lưu file
+    # Áp dụng tách ngành_khối
+    df_final = apply_major_khoi(df_clean)
+
     df_final.to_csv(path_output, index=False, encoding="utf-8-sig")
     print(f"Hoàn tất! File lưu tại: {path_output}")
 
