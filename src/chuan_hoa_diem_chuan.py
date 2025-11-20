@@ -78,58 +78,93 @@ def normalize_tohop(raw, mon_chinh=None):
     return ";".join(sorted(set(new_list)))
 
 # Chuẩn hóa mã ngành
-def normalize_major_code_logic_substring(current_code, last_valid_base):
+def normalize_major_code_logic_substring(current_code, last_valid_base, ma_truong=None):
     """
-    Ý tưởng:
-    - Tìm chuỗi 7 chữ số (\d{7}) bất kỳ trong mã.
-    - Có: Cập nhật Base = 7 số đó. Trả về Mã gốc (Giữ nguyên).
-    - Không: Trả về Base + Mã hiện tại.
+    - Nếu mã ngành BẮT ĐẦU bằng mã trường → giữ nguyên, không chạy logic 7 số.
+      VD: QHX01  (mã trường = QHX)
+    - Nếu chứa chuỗi 7 chữ số → dùng làm base.
+    - Nếu không → ghép base trước đó.
     """
     ma = str(current_code).strip()
-    if not ma or ma.lower() == 'nan':
+    if not ma or ma.lower() == "nan":
         return "", last_valid_base
 
-    # Tìm chuỗi 7 chữ số liên tiếp ở bất kỳ đâu trong chuỗi
-    match = re.search(r"(\d{7})", ma)
-
-    if match:
-        # TRƯỜNG HỢP 1: CHỨA 7 SỐ (VD: "1234567CLC", "7850201", "F7480103")
-        new_base = match.group(1)  # Lấy 7 số tìm thấy làm base (VD: 1234567)
-        return ma, new_base        # Giữ nguyên mã input (1234567CLC)
-
-    else:
-        # TRƯỜNG HỢP 2: KHÔNG CHỨA 7 SỐ (VD: "TT", "DT", "EP01")
-        if last_valid_base:
-            # Nếu mã con đã bắt đầu bằng "_" thì chỉ ghép (tránh __)
-            if ma.startswith('_'):
-                return f"{last_valid_base}{ma}", last_valid_base
-            else:
-                # Nếu chưa có, thêm "_" vào giữa
-                return f"{last_valid_base}_{ma}", last_valid_base
-        else:
-            # Không có base thì trả về nguyên gốc
+    # Nếu mã ngành bắt đầu bằng mã trường
+    if ma_truong and isinstance(ma_truong, str):
+        mt = ma_truong.strip().upper()
+        if ma.upper().startswith(mt):
+            # Không đụng vào logic 7 số → giữ nguyên chuỗi
             return ma, last_valid_base
 
+    # Tách 7 chữ số như trước
+    match = re.search(r"(\d{7})", ma)
+    if match:
+        new_base = match.group(1)
+        return ma, new_base
+
+    # Không có 7 số thì ghép base cũ
+    if last_valid_base:
+        if ma.startswith("_"):
+            return f"{last_valid_base}{ma}", last_valid_base
+        else:
+            return f"{last_valid_base}_{ma}", last_valid_base
+
+    # Không có base → trả về nguyên
+    return ma, last_valid_base
+
+# Xóa tất cả khoảng trắng trong mã ngành
+def remove_whitespace_major(code: str) -> str:
+    if not isinstance(code, str) or not code:
+        return code
+    return code.replace(" ", "")
+
+# Chuẩn hóa tên ngành
+def chuan_hoa_ten_nganh(name: str) -> str:
+    if not name or pd.isna(name):
+        return ""
+
+    name = str(name).strip()
+
+    # Tách phần trước ngoặc và phần trong ngoặc
+    m = re.match(r"^(.*?)(\s*\(.*\))?$", name)
+    if not m:
+        return name
+
+    main = m.group(1).strip()            # phần tên ngành
+    extra = m.group(2) if m.group(2) else ""   # phần trong ngoặc (giữ nguyên)
+
+    # Chuẩn hoá phần tên ngành: viết hoa chữ cái đầu của mỗi từ
+    main = " ".join([w.capitalize() for w in main.split()])
+
+    return f"{main} {extra}".strip()
+
+
 # Lọc ngành có điểm đủ từ năm 2019 - 2025       
-def filter_major_full_years(df_clean):
+def filter_major_full_years(df_clean, path_loai):
     """
     Lọc ra các mã ngành (theo Mã trường + Mã ngành) có đủ
     toàn bộ các năm 2019 → 2025.
+    Đồng thời lưu các hàng bị loại vào file CSV.
     """
     REQUIRED_YEARS = {2019, 2020, 2021, 2022, 2023, 2024, 2025}
 
+    # Xác định các nhóm hợp lệ
     valid_groups = df_clean.groupby(["Mã trường", "Mã ngành"])["Năm xét tuyển"].apply(
         lambda years: REQUIRED_YEARS.issubset(set(years))
     )
-
     valid_indices = valid_groups[valid_groups].index
 
+    # DataFrame cuối cùng chỉ chứa các nhóm hợp lệ
     df_final = (
         df_clean.set_index(["Mã trường", "Mã ngành"])
                 .loc[valid_indices]
                 .reset_index()
                 .sort_values(by=["Mã trường", "Mã ngành", "Năm xét tuyển"])
     )
+
+    # Lưu các hàng bị loại
+    df_removed = df_clean.set_index(["Mã trường", "Mã ngành"]).drop(valid_indices).reset_index()
+    df_removed.to_csv(path_loai, index=False, encoding="utf-8-sig")
 
     return df_final
 
@@ -171,22 +206,7 @@ def apply_major_khoi(df):
 
     return pd.DataFrame(result_rows)
 
-
-def remove_whitespace_major(code: str) -> str:
-    """
-    Xóa tất cả khoảng trắng trong mã ngành.
-    
-    Args:
-        code (str): Mã ngành đầu vào.
-        
-    Returns:
-        str: Mã ngành đã loại bỏ tất cả khoảng trắng.
-    """
-    if not isinstance(code, str) or not code:
-        return code
-    return code.replace(" ", "")
-
-def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
+def process_diem_chuan(path_input, path_output):
     print(f"Đang đọc dữ liệu từ: {path_input}")
     try:
         df = pd.read_csv(path_input, dtype=str).fillna("")
@@ -202,20 +222,19 @@ def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
         ma_raw = r.get("Mã ngành", "")
         ma_raw = remove_whitespace_major(ma_raw) # Xóa khoảng trắng
         # Chuẩn hóa mã ngành
-        ma_final, new_base = normalize_major_code_logic_substring(ma_raw, current_base_id)
-        if new_base:
-            current_base_id = new_base
-
         ten = r.get("Tên ngành", "")
         tohop = extract_to_hop(r.get("Tổ hợp môn", ""))
         score = r.get("Điểm chuẩn", "")
         school = r.get("Mã trường", "")
         ghichu = r.get("Ghi chú", "")
+        ma_final, new_base = normalize_major_code_logic_substring(ma_raw, current_base_id,school)
+        if new_base:
+            current_base_id = new_base
 
         # môn chính
         mon_chinh = detect_mon_chinh(ghichu)
         tohop_norm = normalize_tohop(tohop, mon_chinh)
-
+        ten = chuan_hoa_ten_nganh(ten)
         # năm
         y_match = re.search(r"20\d{2}", str(r.get("Năm xét tuyển", "")))
         year = int(y_match.group(0)) if y_match else 0
@@ -230,13 +249,12 @@ def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
             "Ghi chú": ghichu,
             "Môn chính": mon_chinh if mon_chinh else ""
         })
-
     # tạo DataFrame chuẩn hóa bước 1
     df_clean = pd.DataFrame(clean_rows)
 
     # Lọc ngành có điểm từ 2019–2025
     print("Đang lọc dữ liệu đủ 7 năm (2019-2025)...")
-    df_clean = filter_major_full_years(df_clean)
+    df_clean = filter_major_full_years(df_clean, r"C:\Users\ADMIN\OneDrive - VNU-HCMUS\Documents\GitHub\introduction-to-data-science\data\diem_chuan_bi_loai.csv")
 
     # Áp dụng tách ngành_khối
     df_final = apply_major_khoi(df_clean)
@@ -248,4 +266,5 @@ def process_diem_chuan(path_input, path_output="diem_chuan_chuan_hoa.csv"):
 
 if __name__ == "__main__":
     INPUT_PATH = r"C:\Users\ADMIN\OneDrive - VNU-HCMUS\Documents\GitHub\introduction-to-data-science\data\diem_chuan_all.csv"
-    process_diem_chuan(INPUT_PATH)
+    OUTPUT_PATH = r"C:\Users\ADMIN\OneDrive - VNU-HCMUS\Documents\GitHub\introduction-to-data-science\data\diem_chuan_chuan_hoa.csv"
+    process_diem_chuan(INPUT_PATH, OUTPUT_PATH)
