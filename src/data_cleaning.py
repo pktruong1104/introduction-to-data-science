@@ -3,7 +3,7 @@ import numpy as np
 import json
 import os 
 
-def preprocess_and_filter_data(df, config_path):
+def preprocess_and_filter_data(df, config_path, nguong_diem_liet, nguong_diem_to_hop):
     """
     Hàm này thực hiện toàn bộ quá trình:
     1. Làm sạch (SBD, types, duplicates)
@@ -60,7 +60,7 @@ def preprocess_and_filter_data(df, config_path):
     # === BƯỚC 5: Xử lý điểm liệt (Business Rule) ===
     count_before_liet = len(df_clean) # Số lượng trước khi lọc liệt
     actual_subject_cols_in_df = [col for col in subject_cols if col in df_clean.columns]
-    condition_liet = (df_clean[actual_subject_cols_in_df] <= 1.0).any(axis=1)
+    condition_liet = (df_clean[actual_subject_cols_in_df] <= nguong_diem_liet).any(axis=1)
     df_clean = df_clean[~condition_liet]
     count_after_liet = len(df_clean)
     
@@ -90,7 +90,7 @@ def preprocess_and_filter_data(df, config_path):
         return df_clean, stats 
 
     count_before_tohop = len(df_clean) # Số lượng trước khi lọc tổ hợp
-    condition_15 = (df_clean[to_hop_cols_calculated] >= 15).any(axis=1)
+    condition_15 = (df_clean[to_hop_cols_calculated] >= nguong_diem_to_hop).any(axis=1)
     df_clean = df_clean[condition_15]
     count_after_tohop = len(df_clean)
     
