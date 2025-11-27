@@ -190,3 +190,4 @@ def merge_csv(folder_path=DATA_DIR, nam_thi=2025, output_file=None):
         print(f" Tổng số dòng dữ liệu: {len(merged_df)}")
     else:
         print(" Danh sách dữ liệu rỗng.")
+
