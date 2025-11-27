@@ -33,16 +33,21 @@ def calculate_gridId_Province(df, pd_province_grid):
     return pd.merge(df, pd_province_grid[['MA_TINH', 'GRID_ID']], on='MA_TINH', how='left')
 
 # ========= LẤY TOP 2  =================
-def get_top2_fast(df):
+def get_top_n_fast(df, top_n):
     """
     Lấy 2 khối có điểm cao nhất cho mỗi thí sinh
     """
     df_sorted = df.sort_values(['SBD', 'DIEM_THI'], ascending=[True, False])
-    df_top2 = df_sorted.groupby('SBD').head(2)
+    df_top2 = df_sorted.groupby('SBD').head(top_n)
     return df_top2.reset_index(drop=True)
 
 # ========================= DATA PREPROCESSING ============================
-def process_files_vectorized():
+'''
+    cut_off: lấy từ điểm đó trở lên
+    step: chia mốc điểm 
+    ko cần grid_id cho bảng dữ liệu nữa + mỗi năm một file. 
+'''
+def process_files_vectorized(cut_off=15, step=0.05):
     print("Đang load dữ liệu tỉnh...")
     pd_province = pd.read_csv('../data/province.csv')
     pd_province_grid = create_grid_table(pd_province)
@@ -55,8 +60,8 @@ def process_files_vectorized():
     output_dir = "../data/"
     os.makedirs(output_dir, exist_ok=True)
 
-    # Dictionary để lưu data của tất cả các năm cho mỗi tỉnh
-    province_data = {}
+    # Dictionary để lưu data của tất cả các năm
+    year_data = {}
 
     # Xử lý từng file năm
     for file_path in FILE_PATHS_NEW:
@@ -70,7 +75,7 @@ def process_files_vectorized():
         df = calculate_gridId_Province(df, pd_province_grid)
 
         all_scores = []
-
+        
         for nam_thi_group, group_df in df.groupby('NĂM_THI'):
             to_hop = to_hop_cu if nam_thi_group < 2025 else to_hop_moi
             print(f"\nNăm {nam_thi_group}: {len(group_df):,} thí sinh")
@@ -95,83 +100,76 @@ def process_files_vectorized():
                 
                 print(f"  Khối {khoi}: {len(temp):,} thí sinh hợp lệ")
 
-        if not all_scores:
-            print("Không có dữ liệu hợp lệ!")
-            continue
+            if not all_scores:
+                print("Không có dữ liệu hợp lệ!")
+                continue
 
-        df_all = pd.concat(all_scores, ignore_index=True)
-        print(f"\nTổng số records sau khi tính điểm: {len(df_all):,}")
+            df_all = pd.concat(all_scores, ignore_index=True)
+            print(f"\nTổng số records sau khi tính điểm: {len(df_all):,}")
 
-        # Lấy top 2 khối cho mỗi thí sinh
-        print("Đang lấy top 2 khối cho mỗi thí sinh...")
-        df_top2 = get_top2_fast(df_all)
-        print(f"Sau khi lấy top 2: {len(df_top2):,} records")
-
-        # Chia mốc phân vị
-        bins = list(np.arange(15,  30.05, 0.05))
-        # từ 15.00 đến 30.00 với bước 0.05
-        records = []
-        for moc in bins: 
-            temp = df_top2[df_top2['DIEM_THI'] >= moc].copy()
-            grouped = temp.groupby(['MA_TINH', 'NĂM_THI', 'KHOI_THI', 'GRID_ID'], observed=True)['SBD'] \
-                        .count().reset_index() 
-            grouped['MOC_DIEM'] = moc
-            records.append(grouped)
-        df_summary = pd.concat(records,ignore_index=True)
-        df_summary = df_summary.rename(columns={'SBD': 'SO_THI_SINH'})
-        
-        # QUAN TRỌNG: Tính tổng thí sinh DUY NHẤT tham gia khối đó
-        # (1 thí sinh chỉ tính 1 lần dù có thể có điểm ở nhiều khối)
-        print("Đang tính tổng thí sinh duy nhất cho mỗi khối...")
-        df_total = df_top2.groupby(['MA_TINH','NĂM_THI','KHOI_THI'], observed=True)['SBD'] \
-                        .nunique().reset_index().rename(columns={'SBD':'TONG_THI_SINH'})
-        # Định dạng lại cho mốc điểm
-        df_summary['MOC_DIEM'] = df_summary['MOC_DIEM'].apply(lambda x: f"{x:.2f}")
-        
-
-        # Merge tổng thí sinh ( ko cần tỉnh tổng số lượng thí sinh)
-        # df_summary = df_summary.merge(df_total, on=['MA_TINH','NĂM_THI','KHOI_THI'], how='left')
-        
-        # Tính tỷ lệ % ( ko cần tính tỷ lệ )
-        # df_summary['TY_LE'] = (df_summary['SO_THI_SINH'] / df_summary['TONG_THI_SINH'] * 100).round(2)
-        
-        # Lưu vào dictionary theo mã tỉnh
-        for ma_tinh in df_summary['MA_TINH'].unique():
-            if ma_tinh not in province_data:
-                province_data[ma_tinh] = []
-
-            df_tinh = df_summary[df_summary['MA_TINH'] == ma_tinh].copy()
-            province_data[ma_tinh].append(df_tinh)
-            print(f"  Tỉnh {ma_tinh}: {len(df_tinh):,} records")
-
-    # Gộp tất cả các năm và export từng tỉnh
+            # Lấy top 2 khối cho mỗi thí sinh
+            print("Đang lấy top 2 khối cho mỗi thí sinh...")
+            df_topn = get_top_n_fast(df_all, top_n=2)
+            print(f"Sau khi lấy top 2: {len(df_topn):,} records")
+            
+            # Chia mốc phân vị
+            bins = list(np.arange(cut_off,  30.05, step))
+            # từ 15.00 đến 30.00 với bước 0.05
+            records = []
+            for moc in bins: 
+                temp = df_topn[df_topn['DIEM_THI'] >= moc].copy()
+                # Bỏ grid_id
+                grouped = temp.groupby(['MA_TINH', 'NĂM_THI', 'KHOI_THI'], observed=True)['SBD'] \
+                            .count().reset_index() 
+                grouped['MOC_DIEM'] = moc
+                records.append(grouped)
+            df_summary = pd.concat(records,ignore_index=True) # ghép lại theo theo chiều dọc 
+            df_summary = df_summary.rename(columns={'SBD': 'SO_THI_SINH'})
+            
+            # QUAN TRỌNG: Tính tổng thí sinh DUY NHẤT tham gia khối đó
+            # (1 thí sinh chỉ tính 1 lần dù có thể có điểm ở nhiều khối)
+            print("Đang tính tổng thí sinh duy nhất cho mỗi khối...")
+            df_total = df_topn.groupby(['MA_TINH','NĂM_THI','KHOI_THI'], observed=True)['SBD'] \
+                            .nunique().reset_index().rename(columns={'SBD':'TONG_THI_SINH'})
+            # Định dạng lại cho mốc điểm
+            df_summary['MOC_DIEM'] = df_summary['MOC_DIEM'].apply(lambda x: f"{x:.2f}")
+            
+            
+            # Lưu vào dictionary theo năm thi
+            if nam_thi_group not in year_data: 
+                year_data[nam_thi_group] = []
+            
+            year_data[nam_thi_group].append(df_summary)
+            print(f"Năm {nam_thi_group}: {len(df_summary):,} records ")
+    
+    # Gộp các tỉnh lại với nhau và export theo từng năm 
     print(f"\n{'='*60}")
-    print("Đang export dữ liệu theo từng tỉnh...")
+    print("Đang export dữ liệu cho từng năm...")
     print(f"{'='*60}")
     
-    for ma_tinh, data_list in province_data.items():
-        # Gộp tất cả các năm của tỉnh này (từ năm 2019-> 2025)
-        df_province_all_years = pd.concat(data_list, ignore_index=True)
+    for nam_thi, data_list in year_data.items():
+        # Gộp tất cả các tỉnh của năm 
+        df_year_all_provinces = pd.concat(data_list, ignore_index=True)
         
-        # Sắp xếp theo năm, khối, khoảng điểm
-        df_province_all_years = df_province_all_years.sort_values(
-            ['NĂM_THI', 'KHOI_THI', 'MOC_DIEM']
-        ).reset_index(drop=True)
+        # Sắp xếp theo tỉnh, khối, khoảng điểm 
+        df_year_all_provinces = df_year_all_provinces.sort_values(['MA_TINH', 'KHOI_THI', 'MOC_DIEM']).reset_index(drop=True)
+
         
-        # Ghi vào file csv cho từng tỉnh 
-        output_file = os.path.join(output_dir, f"{ma_tinh}_summary.csv")
-        df_province_all_years.to_csv(output_file, index=False, encoding='utf-8-sig')
+        # Ghi vào file csv cho từng năm
+        output_file = os.path.join(output_dir, f"{nam_thi}_summary.csv")
+        df_year_all_provinces.to_csv(output_file, index=False, encoding='utf-8-sig')
         
-        years = df_province_all_years['NĂM_THI'].unique()
-        print(f"✓ Tỉnh {ma_tinh}: {len(df_province_all_years):,} records, "
-              f"Năm: {', '.join(map(str, sorted(years)))} → {output_file}")
+        provinces  = df_year_all_provinces['MA_TINH'].unique()
+        print(f"✓ Tỉnh {nam_thi}: {len(df_year_all_provinces):,} records, "
+              f"Năm: {', '.join(map(str, sorted(provinces)))} → {output_file}")
     
     print(f"\n{'='*60}")
-    print(f"Hoàn thành! Đã tạo {len(province_data)} file tỉnh")
+    print(f"Hoàn thành! Đã tạo {len(year_data)} file")
     print(f"{'='*60}")
 
 if __name__ == "__main__":
+    cut_off = 15
     import time
     start = time.time()
-    process_files_vectorized()
+    process_files_vectorized(cut_off,step=0.05)
     print(f"\nTổng thời gian: {time.time()-start:.2f} giây")
