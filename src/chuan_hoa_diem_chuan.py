@@ -11,34 +11,6 @@ def remove_accents(s: str):
     s = ''.join(c for c in s if unicodedata.category(c) != 'Mn')
     return s.replace('đ', 'd').replace('Đ', 'D')
 
-# Trích xuất môn chính
-def detect_mon_chinh(ghichu: str):
-    """
-    Nhận dạng môn chính duy nhất.
-    Chỉ xử lý dạng:
-        - 'Môn chính: Toán'
-        - 'Môn chính Toán'
-    Mọi dạng 'nhân 2', 'nhân 3', 'hệ số', ... đều bị bỏ qua.
-    """
-    if not ghichu or pd.isna(ghichu):
-        return None
-
-    g = str(ghichu).strip()
-
-    # Chỉ nhận dạng "Môn chính"
-    m = re.search(r"môn\s*chính[:\s]+(.+)", g, re.IGNORECASE)
-    if m:
-        mon_raw = m.group(1).strip()
-
-        # Làm sạch
-        mon_raw = re.split(r"[,.;()]", mon_raw)[0].strip()   # bỏ phần sau dấu phẩy
-        mon_raw = re.sub(r"\s+", " ", mon_raw)
-
-        return remove_accents(mon_raw).upper()
-
-    # Không phải môn chính → bỏ qua hoàn toàn
-    return None
-
 # Xử lí những tổ hợp đặc biệt
 def extract_to_hop(raw: str) -> str:
     """
@@ -58,24 +30,6 @@ def extract_to_hop(raw: str) -> str:
 
     # Trả về dạng TOÁN;ANH;C03...
     return ";".join(parts)
-
-# Khối_môn chính
-def normalize_tohop(raw, mon_chinh=None):
-    if not raw or pd.isna(raw):
-        return ""
-    s = str(raw).upper().strip().replace(" ", "")
-    khoi_list = re.split(r"[;,/|]+", s)
-    khoi_list = [k for k in khoi_list if k]
-    if not mon_chinh:
-        return ";".join(sorted(set(khoi_list)))
-    mon = remove_accents(mon_chinh).upper()
-    new_list = []
-    for k in khoi_list:
-        if mon not in k:
-            new_list.append(f"{k}_{mon}")
-        else:
-            new_list.append(k)
-    return ";".join(sorted(set(new_list)))
 
 # Chuẩn hóa mã ngành
 def normalize_major_code_logic_substring(current_code, last_valid_base, ma_truong=None):
@@ -123,21 +77,41 @@ def chuan_hoa_ten_nganh(name: str) -> str:
     if not name or pd.isna(name):
         return ""
 
-    name = str(name).strip()
+    name = str(name)
 
-    # Tách phần trước ngoặc và phần trong ngoặc
+    # Loại bỏ khoảng trắng thừa tổng quát
+    name = name.strip()
+    name = re.sub(r"\s+", " ", name)  # gom khoảng trắng thừa
+
+    # Tách phần ngoài ngoặc và trong ngoặc
     m = re.match(r"^(.*?)(\s*\(.*\))?$", name)
     if not m:
         return name
 
-    main = m.group(1).strip()            # phần tên ngành
-    extra = m.group(2) if m.group(2) else ""   # phần trong ngoặc (giữ nguyên)
+    main = m.group(1).strip()               # phần tên ngành
+    extra = m.group(2).strip() if m.group(2) else ""   # phần trong ngoặc
 
-    # Chuẩn hoá phần tên ngành: viết hoa chữ cái đầu của mỗi từ
-    main = " ".join([w.capitalize() for w in main.split()])
+    # Viết hoa chữ cái đầu mỗi từ
+    main = " ".join(w.capitalize() for w in main.split())
 
-    return f"{main} {extra}".strip()
+    # --- Chuẩn hóa phần inside (trong ngoặc) ---
+    if extra:
+        # Lấy nội dung bên trong ()
+        m2 = re.match(r"^\((.*)\)$", extra)
+        if m2:
+            inside = m2.group(1).strip()
 
+            # Rút gọn khoảng trắng trong ngoặc
+            inside = re.sub(r"\s+", " ", inside)
+
+            # Viết hoa chữ cái đầu, các ký tự sau viết thường
+            if inside:
+                inside = inside[0].upper() + inside[1:].lower()
+
+            extra = f"({inside})"
+
+    # Ghép lại
+    return (main + " " + extra).strip()
 
 # Lọc ngành có điểm đủ từ năm 2019 - 2025       
 def filter_major_full_years(df_clean, path_loai):
@@ -231,9 +205,6 @@ def process_diem_chuan(path_input, path_output):
         if new_base:
             current_base_id = new_base
 
-        # môn chính
-        mon_chinh = detect_mon_chinh(ghichu)
-        tohop_norm = normalize_tohop(tohop, mon_chinh)
         ten = chuan_hoa_ten_nganh(ten)
         # năm
         y_match = re.search(r"20\d{2}", str(r.get("Năm xét tuyển", "")))
@@ -243,11 +214,10 @@ def process_diem_chuan(path_input, path_output):
             "Mã trường": school,
             "Mã ngành": ma_final,
             "Tên ngành": ten,
-            "Tổ hợp môn": tohop_norm,
+            "Tổ hợp môn": tohop,
             "Điểm chuẩn": score,
             "Năm xét tuyển": year,
             "Ghi chú": ghichu,
-            "Môn chính": mon_chinh if mon_chinh else ""
         })
     # tạo DataFrame chuẩn hóa bước 1
     df_clean = pd.DataFrame(clean_rows)
