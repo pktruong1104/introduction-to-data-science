@@ -48,7 +48,8 @@ def get_top_n_fast(df, top_n):
     step: chia mốc điểm 
     ko cần grid_id cho bảng dữ liệu nữa + mỗi năm một file. 
 '''
-def process_files_vectorized(cut_off=15, step=0.05):
+
+def process_files_vectorized(cut_off=15.00, step=0.05):
     print("Đang load dữ liệu tỉnh...")
     pd_province = pd.read_csv('../data/province.csv')
     pd_province_grid = create_grid_table(pd_province)
@@ -169,7 +170,7 @@ def process_files_vectorized(cut_off=15, step=0.05):
     print(f"{'='*60}")
 
 if __name__ == "__main__":
-    cut_off = 15
+    cut_off = 15.00
     import time
     start = time.time()
     process_files_vectorized(cut_off,step=0.05)
