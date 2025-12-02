@@ -99,7 +99,7 @@ def chuan_hoa_ten_nganh(df):
 
     # Áp dụng mode cho từng nhóm
     df["Tên ngành"] = (
-        df.groupby(["Mã ngành", "Tổ hợp môn"])["Tên ngành"]
+        df.groupby(["Mã ngành"])["Tên ngành"]
           .transform(get_mode)
     )
     return df
