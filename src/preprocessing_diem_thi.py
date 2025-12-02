@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import os
 import json
+import requests
+import time
 
 # ======================= CONFIG ===========================
 CUC_NAM, CUC_BAC, CUC_DONG, CUC_TAY = 8, 24, 110, 102
@@ -19,6 +21,143 @@ FILE_PATHS_NEW = [
     '../data/diem_thi_2024_new.csv',
     '../data/diem_thi_2025_new.csv'
 ]
+
+# Danh sách tỉnh thành Việt Nam
+provinces = [
+    {'code': '01', 'name': 'Hà Nội'},
+    {'code': '02', 'name': 'Thành phố Hồ Chí Minh'},
+    {'code': '03', 'name': 'Hải Phòng'},
+    {'code': '04', 'name': 'Đà Nẵng'},
+    {'code': '05', 'name': 'Hà Giang'},
+    {'code': '06', 'name': 'Cao Bằng'},
+    {'code': '07', 'name': 'Lai Châu'},
+    {'code': '08', 'name': 'Lào Cai'},
+    {'code': '09', 'name': 'Tuyên Quang'},
+    {'code': '10', 'name': 'Lạng Sơn'},
+    {'code': '11', 'name': 'Bắc Kạn'},
+    {'code': '12', 'name': 'Thái Nguyên'},
+    {'code': '13', 'name': 'Yên Bái'},
+    {'code': '14', 'name': 'Sơn La'},
+    {'code': '15', 'name': 'Phú Thọ'},
+    {'code': '16', 'name': 'Vĩnh Phúc'},
+    {'code': '17', 'name': 'Quảng Ninh'},
+    {'code': '18', 'name': 'Bắc Giang'},
+    {'code': '19', 'name': 'Bắc Ninh'},
+    {'code': '21', 'name': 'Hải Dương'},
+    {'code': '22', 'name': 'Hưng Yên'},
+    {'code': '23', 'name': 'Hòa Bình'},
+    {'code': '24', 'name': 'Hà Nam'},
+    {'code': '25', 'name': 'Nam Định'},
+    {'code': '26', 'name': 'Thái Bình'},
+    {'code': '27', 'name': 'Ninh Bình'},
+    {'code': '28', 'name': 'Thanh Hóa'},
+    {'code': '29', 'name': 'Nghệ An'},
+    {'code': '30', 'name': 'Hà Tĩnh'},
+    {'code': '31', 'name': 'Quảng Bình'},
+    {'code': '32', 'name': 'Quảng Trị'},
+    {'code': '33', 'name': 'Thừa Thiên Huế'},
+    {'code': '34', 'name': 'Quảng Nam'},
+    {'code': '35', 'name': 'Quảng Ngãi'},
+    {'code': '36', 'name': 'Kon Tum'},
+    {'code': '37', 'name': 'Bình Định'},
+    {'code': '38', 'name': 'Gia Lai'},
+    {'code': '39', 'name': 'Phú Yên'},
+    {'code': '40', 'name': 'Đắk Lắk'},
+    {'code': '41', 'name': 'Khánh Hòa'},
+    {'code': '42', 'name': 'Lâm Đồng'},
+    {'code': '43', 'name': 'Bình Phước'},
+    {'code': '44', 'name': 'Bình Dương'},
+    {'code': '45', 'name': 'Ninh Thuận'},
+    {'code': '46', 'name': 'Tây Ninh'},
+    {'code': '47', 'name': 'Bình Thuận'},
+    {'code': '48', 'name': 'Đồng Nai'},
+    {'code': '49', 'name': 'Long An'},
+    {'code': '50', 'name': 'Đồng Tháp'},
+    {'code': '51', 'name': 'An Giang'},
+    {'code': '52', 'name': 'Bà Rịa-Vũng Tàu'},
+    {'code': '53', 'name': 'Tiền Giang'},
+    {'code': '54', 'name': 'Kiên Giang'},
+    {'code': '55', 'name': 'Cần Thơ'},
+    {'code': '56', 'name': 'Bến Tre'},
+    {'code': '57', 'name': 'Vĩnh Long'},
+    {'code': '58', 'name': 'Trà Vinh'},
+    {'code': '59', 'name': 'Sóc Trăng'},
+    {'code': '60', 'name': 'Bạc Liêu'},
+    {'code': '61', 'name': 'Cà Mau'},
+    {'code': '62', 'name': 'Điện Biên'},
+    {'code': '63', 'name': 'Đắk Nông'},
+    {'code': '64', 'name': 'Hậu Giang'}
+]
+
+output_dir = "../data/"
+# =================== LẤY DATA CHO TỈNH =====================
+# Token xác thực
+MAPBOX_TOKEN = 'pk.eyJ1IjoidHJ1b25nMTEwNHoiLCJhIjoiY21pb2hzbXMxMDF5bDNrcTNhd2F3d28xayJ9.kAM8eS6y5ZtUid-qOibFDg'
+
+def geocode_province(province_name, token):
+    """
+    Lấy tọa độ của tỉnh thành từ Mapbox Geocoding API
+    """
+    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{province_name}, Vietnam.json"
+    params = {
+        'access_token': token,
+        'country': 'VN',
+        'types': 'region,place',
+        'limit': 1
+    }
+    
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['features']:
+            coordinates = data['features'][0]['center']
+            # làm tròn 
+            longitude = round(coordinates[0], 4)
+            latitude = round(coordinates[1], 4)
+            return latitude, longitude
+        else:
+            print(f"Không tìm thấy tọa độ cho: {province_name}")
+            return None, None
+            
+    except requests.exceptions.RequestException as e:
+        print(f"Lỗi khi lấy tọa độ cho {province_name}: {e}")
+        return None, None
+
+def crawl_province():
+    results = []
+    
+    print("Bắt đầu lấy tọa độ các tỉnh thành Việt Nam...")
+    print("-" * 60)
+    
+    for i, province in enumerate(provinces, 1):
+        print(f"[{i}/{len(provinces)}] Đang lấy: {province['name']}: ", end=' ')
+        
+        latitude, longitude = geocode_province(province['name'], MAPBOX_TOKEN)
+        
+        if latitude and longitude:
+            results.append({
+                'MA_TINH': province['code'],
+                'TEN_TINH': province['name'],
+                'VI_DO': latitude,
+                'KINH_DO': longitude
+            })
+            print(f" ({latitude}, {longitude})")
+        else:
+            print(" Thất bại")
+        
+        # Delay để tránh rate limit
+        time.sleep(0.1)
+    
+    print("-" * 60)
+    print(f"Hoàn thành! Đã lấy được {len(results)}/{len(provinces)} tỉnh thành")
+    df = pd.DataFrame(results)
+
+    # Ghi ra file CSV
+    output_file = os.path.join(output_dir, f"province.csv")
+    df.to_csv(output_file, index=False, encoding='utf-8-sig')
+    print(f"Ghi vào file .csv thành công")
 
 # =================== TẠO GRID CHO TỈNH =====================
 def create_grid_table(pd_province):
@@ -48,7 +187,6 @@ def get_top_n_fast(df, top_n):
     step: chia mốc điểm 
     ko cần grid_id cho bảng dữ liệu nữa + mỗi năm một file. 
 '''
-
 def process_files_vectorized(cut_off=15.00, step=0.05):
     print("Đang load dữ liệu tỉnh...")
     pd_province = pd.read_csv('../data/province.csv')
@@ -170,8 +308,4 @@ def process_files_vectorized(cut_off=15.00, step=0.05):
     print(f"{'='*60}")
 
 if __name__ == "__main__":
-    cut_off = 15.00
-    import time
-    start = time.time()
-    process_files_vectorized(cut_off,step=0.05)
-    print(f"\nTổng thời gian: {time.time()-start:.2f} giây")
+    crawl_province()
