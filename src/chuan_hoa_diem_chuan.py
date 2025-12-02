@@ -20,10 +20,22 @@ def extract_to_hop(raw: str) -> str:
     """
     if raw is None or raw == "":
         return ""
+    s = str(raw)
+    s = s.strip()
+    s = re.sub(r"\s+", " ", s)  # Gom khoảng trắng thừa
 
-    # Loại bỏ tất cả '(' và ')'
-    raw = raw.replace("(", "").replace(")", "").strip()
-
+    # Nếu có ngoặc: GIỮ NGUYÊN nội dung
+    if "(" in s or ")" in s:
+        # Xóa khoảng trắng trước "("
+        s = re.sub(r"\s+\(", "(", s)
+        # Xóa khoảng trắng sau ")"
+        s = re.sub(r"\)\s+", ")", s)
+        # Xóa khoảng trắng giữa dấu "(" và chữ
+        s = re.sub(r"\(\s+", "(", s)
+        # Xóa khoảng trắng trước dấu ")"
+        s = re.sub(r"\s+\)", ")", s)
+        # Loại bỏ dấu nháy " sau dấu )
+        return s.strip()
     # Chuẩn hóa các dấu phân tách thành ';'
     parts = re.split(r"[;,/|]+", raw)
     parts = [p.strip() for p in parts if p.strip()]
@@ -180,6 +192,74 @@ def apply_major_khoi(df):
 
     return pd.DataFrame(result_rows)
 
+# Xử lí missing data
+def fill_missing_nearest_year(df):
+    """
+    Điền Tên ngành / Tổ hợp môn bị rỗng dựa trên:
+    - ưu tiên Tổ hợp môn của năm liền trước nếu có
+    - năm gần nhất (có thể trước hoặc sau)
+    - ưu tiên năm có cùng tên ngành
+    - nếu nhiều lựa chọn → ưu tiên năm lớn hơn
+    """
+    filled_rows = []
+
+    for (school, major), group in df.groupby(["Mã trường", "Mã ngành"]):
+        group_sorted = group.sort_values("Năm xét tuyển")
+        years = group_sorted["Năm xét tuyển"].tolist()
+
+        name_map = dict(zip(years, group_sorted["Tên ngành"]))
+        tohop_map = dict(zip(years, group_sorted["Tổ hợp môn"]))
+
+        updated_rows = []
+
+        for _, row in group_sorted.iterrows():
+            year = row["Năm xét tuyển"]
+            name = row["Tên ngành"].strip()
+            tohop = row["Tổ hợp môn"].strip()
+
+            # Nếu đầy đủ thì giữ nguyên
+            if name and tohop:
+                updated_rows.append(row)
+                continue
+
+            # Xét năm liền trước của mã ngành
+            if not tohop:
+                prev_year = year - 1
+                prev_tohop = tohop_map.get(prev_year, "").strip()
+                if prev_tohop:
+                    row["Tổ hợp môn"] = prev_tohop
+                    tohop = prev_tohop
+
+            # Tìm dữ liệu nếu năm liền trước ko có dữ liệu thì xét tiến tới năm gần nhất
+            if not name or not tohop:
+                candidates = [y for y in years if y != year and (name_map.get(y, "").strip() or tohop_map.get(y, "").strip())]
+
+                if candidates:
+                    min_dist = min(abs(y - year) for y in candidates)
+                    nearest_years = [y for y in candidates if abs(y - year) == min_dist]
+
+                    if not name:
+                        same_name_years = [
+                            y for y in nearest_years
+                            if name_map.get(y, "").strip().lower() == name_map.get(year, "").strip().lower()
+                        ]
+                        if same_name_years:
+                            nearest_years = same_name_years
+
+                    chosen_year = max(nearest_years)
+
+                    if not name:
+                        row["Tên ngành"] = name_map.get(chosen_year, "")
+                    if not tohop:
+                        row["Tổ hợp môn"] = tohop_map.get(chosen_year, "")
+
+            updated_rows.append(row)
+
+        filled_rows.extend(updated_rows)
+
+    return pd.DataFrame(filled_rows)
+
+
 def process_diem_chuan(path_input, path_output):
     print(f"Đang đọc dữ liệu từ: {path_input}")
     try:
@@ -221,7 +301,7 @@ def process_diem_chuan(path_input, path_output):
         })
     # tạo DataFrame chuẩn hóa bước 1
     df_clean = pd.DataFrame(clean_rows)
-
+    df_clean = fill_missing_nearest_year(df_clean)
     # Lọc ngành có điểm từ 2019–2025
     print("Đang lọc dữ liệu đủ 7 năm (2019-2025)...")
     df_clean = filter_major_full_years(df_clean, r"C:\Users\ADMIN\OneDrive - VNU-HCMUS\Documents\GitHub\introduction-to-data-science\data\diem_chuan_bi_loai.csv")
