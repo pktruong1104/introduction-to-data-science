@@ -5,7 +5,7 @@ import os
 import json
 import requests
 import time
-
+from dotenv import load_dotenv
 # ======================= CONFIG ===========================
 CUC_NAM, CUC_BAC, CUC_DONG, CUC_TAY = 8, 24, 110, 102
 
@@ -92,7 +92,8 @@ provinces = [
 output_dir = "../data/"
 # =================== LẤY DATA CHO TỈNH =====================
 # Token xác thực
-MAPBOX_TOKEN = 'pk.eyJ1IjoidHJ1b25nMTEwNHoiLCJhIjoiY21pb2hzbXMxMDF5bDNrcTNhd2F3d28xayJ9.kAM8eS6y5ZtUid-qOibFDg'
+load_dotenv()
+MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
 
 def geocode_province(province_name, token):
     """
