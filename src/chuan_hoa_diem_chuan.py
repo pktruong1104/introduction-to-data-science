@@ -20,7 +20,7 @@ def remove_accents(s: str):
 def extract_to_hop(raw: str) -> str:
     """
     Nhận chuỗi Tổ hợp môn (có thể có ngoặc, khoảng trắng, dấu phân tách khác nhau)
-    Trả về chuỗi chuẩn: TOÁN;ANH;C03;C04;GDKTPL
+    Trả về chuỗi chuẩn: C03;C04;GDKTPL
     """
     if raw is None or raw == "":
         return ""
@@ -147,36 +147,70 @@ def filter_major_full_years(df_clean: pd.DataFrame, path_loai) -> pd.DataFrame:
 # ==========================
 # Tách ngành_khối
 # ==========================
-
-def apply_major_khoi(df: pd.DataFrame) -> pd.DataFrame:
+def apply_major_khoi(df):
     """
-    Chỉ tách thành mã ngành_khối khi:
+    CHỈ đổi mã ngành khi:
         - Cùng Mã trường
-        - Cùng Mã ngành
+        - Cùng Mã ngành gốc
         - Cùng Năm xét tuyển
-        - Có >= 2 tổ hợp môn
-    """
-    group_counts = (
-        df.groupby(["Mã trường", "Mã ngành", "Năm xét tuyển"])["Tổ hợp môn"]
-        .nunique()
-    )
+        - Có >= 2 tổ hợp môn khác nhau
 
-    multi_keys = set(group_counts[group_counts > 1].index)
+    Ngược lại => GIỮ NGUYÊN mã ngành.
+    """
+
     result_rows = []
 
-    for _, r in df.iterrows():
-        key = (r["Mã trường"], r["Mã ngành"], r["Năm xét tuyển"])
-        khoi_list = str(r["Tổ hợp môn"]).split(";") if r["Tổ hợp môn"] else [""]
+    grouped = df.groupby(["Mã trường", "Năm xét tuyển", "Mã ngành"], sort=False)
 
-        if key in multi_keys:
-            for khoi in khoi_list:
-                result_rows.append({
-                    **r.to_dict(),
-                    "Mã ngành": f"{r['Mã ngành']}_{khoi}",
-                    "Tổ hợp môn": khoi,
-                })
-        else:
-            result_rows.append(r.to_dict())
+    for (school, year, major), group in grouped:
+
+        # Nếu chỉ có 1 dòng => giữ nguyên hết
+        if len(group) == 1:
+            result_rows.append(group.iloc[0].to_dict())
+            continue
+
+        # Lấy danh sách tổ hợp duy nhất
+        unique_khoi = group["Tổ hợp môn"].unique()
+
+        # Nếu chỉ có 1 tổ hợp => cũng giữ nguyên hết
+        if len(unique_khoi) == 1:
+            for _, r in group.iterrows():
+                result_rows.append(r.to_dict())
+            continue
+
+        # ĐẾN ĐÂY: chỉ xử lý khi có >=2 TỔ HỢP KHÁC NHAU
+        used_codes = {}
+        base_major = major
+
+        for _, r in group.iterrows():
+            tohop = str(r["Tổ hợp môn"])
+            khoi_list = [k.strip() for k in tohop.split(";") if k.strip()]
+
+            # Nếu nhiều khối → gom thành 1 nhóm, đánh số
+            if len(khoi_list) > 1:
+                if base_major not in used_codes:
+                    used_codes[base_major] = 1
+                    new_code = f"{base_major}_1"
+                else:
+                    used_codes[base_major] += 1
+                    new_code = f"{base_major}_{used_codes[base_major]}"
+
+            # Nếu chỉ 1 khối → thêm đuôi khối, tránh trùng
+            else:
+                khoi = khoi_list[0]
+                base_code = f"{base_major}_{khoi}"
+
+                if base_code not in used_codes:
+                    used_codes[base_code] = 0
+                    new_code = base_code
+                else:
+                    used_codes[base_code] += 1
+                    new_code = f"{base_code}_{used_codes[base_code]}"
+
+            # Tạo dòng kết quả
+            new_row = r.to_dict()
+            new_row["Mã ngành"] = new_code
+            result_rows.append(new_row)
 
     return pd.DataFrame(result_rows)
 
@@ -315,11 +349,11 @@ def process_diem_chuan(path_input, path_output, path_removed):
     print("Đang lọc các ngành có đủ dữ liệu từ 2019 đến 2024...")
     df_clean = filter_major_full_years(df_clean, path_removed)
 
-    # Chuẩn hóa tên ngành
-    df_clean = chuan_hoa_ten_nganh(df_clean)
-
     # Tách ngành_khối
-    df_final = apply_major_khoi(df_clean)
+    df_clean = apply_major_khoi(df_clean)
+
+    # Chuẩn hóa tên ngành
+    df_final = chuan_hoa_ten_nganh(df_clean)
 
     # Ghi output
     df_final.to_csv(path_output, index=False, encoding="utf-8-sig")
