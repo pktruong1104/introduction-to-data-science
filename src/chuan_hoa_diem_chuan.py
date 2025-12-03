@@ -85,45 +85,25 @@ def remove_whitespace_major(code: str) -> str:
     return code.replace(" ", "")
 
 # Chuẩn hóa tên ngành
-def chuan_hoa_ten_nganh(name: str) -> str:
-    if not name or pd.isna(name):
-        return ""
+def chuan_hoa_ten_nganh(df):
+    """
+    Chuẩn hóa Tên ngành theo:
+    - Nhóm các dòng cùng Mã ngành + Tổ hợp môn
+    - Lấy tên ngành xuất hiện nhiều nhất (mode)
+    """
+    def get_mode(series):
+        counts = series.value_counts()
+        if counts.empty:
+            return ""
+        return counts.idxmax()
 
-    name = str(name)
+    # Áp dụng mode cho từng nhóm
+    df["Tên ngành"] = (
+        df.groupby(["Mã ngành"])["Tên ngành"]
+          .transform(get_mode)
+    )
+    return df
 
-    # Loại bỏ khoảng trắng thừa tổng quát
-    name = name.strip()
-    name = re.sub(r"\s+", " ", name)  # gom khoảng trắng thừa
-
-    # Tách phần ngoài ngoặc và trong ngoặc
-    m = re.match(r"^(.*?)(\s*\(.*\))?$", name)
-    if not m:
-        return name
-
-    main = m.group(1).strip()               # phần tên ngành
-    extra = m.group(2).strip() if m.group(2) else ""   # phần trong ngoặc
-
-    # Viết hoa chữ cái đầu mỗi từ
-    main = " ".join(w.capitalize() for w in main.split())
-
-    # --- Chuẩn hóa phần inside (trong ngoặc) ---
-    if extra:
-        # Lấy nội dung bên trong ()
-        m2 = re.match(r"^\((.*)\)$", extra)
-        if m2:
-            inside = m2.group(1).strip()
-
-            # Rút gọn khoảng trắng trong ngoặc
-            inside = re.sub(r"\s+", " ", inside)
-
-            # Viết hoa chữ cái đầu, các ký tự sau viết thường
-            if inside:
-                inside = inside[0].upper() + inside[1:].lower()
-
-            extra = f"({inside})"
-
-    # Ghép lại
-    return (main + " " + extra).strip()
 
 # Lọc ngành có điểm đủ từ năm 2019 - 2025       
 def filter_major_full_years(df_clean, path_loai):
@@ -285,7 +265,6 @@ def process_diem_chuan(path_input, path_output):
         if new_base:
             current_base_id = new_base
 
-        ten = chuan_hoa_ten_nganh(ten)
         # năm
         y_match = re.search(r"20\d{2}", str(r.get("Năm xét tuyển", "")))
         year = int(y_match.group(0)) if y_match else 0
@@ -306,6 +285,7 @@ def process_diem_chuan(path_input, path_output):
     print("Đang lọc dữ liệu đủ 7 năm (2019-2025)...")
     df_clean = filter_major_full_years(df_clean, r"C:\Users\ADMIN\OneDrive - VNU-HCMUS\Documents\GitHub\introduction-to-data-science\data\diem_chuan_bi_loai.csv")
 
+    df_clean = chuan_hoa_ten_nganh(df_clean)
     # Áp dụng tách ngành_khối
     df_final = apply_major_khoi(df_clean)
 
