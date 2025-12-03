@@ -349,11 +349,11 @@ def process_diem_chuan(path_input, path_output, path_removed):
     print("Đang lọc các ngành có đủ dữ liệu từ 2019 đến 2024...")
     df_clean = filter_major_full_years(df_clean, path_removed)
 
-    # Chuẩn hóa tên ngành
-    df_clean = chuan_hoa_ten_nganh(df_clean)
-
     # Tách ngành_khối
-    df_final = apply_major_khoi(df_clean)
+    df_clean = apply_major_khoi(df_clean)
+
+    # Chuẩn hóa tên ngành
+    df_final = chuan_hoa_ten_nganh(df_clean)
 
     # Ghi output
     df_final.to_csv(path_output, index=False, encoding="utf-8-sig")
