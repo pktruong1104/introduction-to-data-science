@@ -193,10 +193,9 @@ def process_files_vectorized(cut_off=15.00, step=0.05):
     pd_province = pd.read_csv('../data/province.csv')
     pd_province_grid = create_grid_table(pd_province)
 
-    with open('../data/to_hop_cu.json', 'r', encoding='utf-8') as f:
-        to_hop_cu = json.load(f)
-    with open('../data/to_hop_moi.json', 'r', encoding='utf-8') as f:
-        to_hop_moi = json.load(f)
+    with open('../data/to_hop.json', 'r', encoding='utf-8') as f:
+        to_hop = json.load(f)
+    
 
     output_dir = "../data/"
     os.makedirs(output_dir, exist_ok=True)
@@ -218,11 +217,11 @@ def process_files_vectorized(cut_off=15.00, step=0.05):
         all_scores = []
         
         for nam_thi_group, group_df in df.groupby('NĂM_THI'):
-            to_hop = to_hop_cu if nam_thi_group < 2025 else to_hop_moi
+            to_hop_year = to_hop 
             print(f"\nNăm {nam_thi_group}: {len(group_df):,} thí sinh")
-
+            
             # Tính điểm tất cả khối vectorized
-            for khoi, subjects in to_hop.items():
+            for khoi, subjects in to_hop_year.items():
                 subjects_exist = [s for s in subjects if s in group_df.columns]
                 if not subjects_exist:
                     continue
