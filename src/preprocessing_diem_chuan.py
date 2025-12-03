@@ -24,7 +24,7 @@ def build_nganh_training_dataset(
     input_csv: str,
     output_csv: str,
     year_from: int = 2019,
-    year_to: int = 2025,
+    year_to: int = 2024,
 ) -> None:
     """
     Từ diem_chuan_chuan_hoa.csv (dạng long):
@@ -66,7 +66,7 @@ def build_nganh_training_dataset(
             f"trong file {input_csv}"
         )
 
-    base_cols = ["Mã trường", "Mã ngành"]
+    base_cols = ["Mã trường", "Mã ngành", "Tên ngành"]
 
     # Gộp trước theo (Mã trường, Mã ngành, Tên ngành, Năm xét tuyển)
     # để đảm bảo mỗi (ngành, năm) là 1 record duy nhất.
