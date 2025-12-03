@@ -19,7 +19,7 @@ FILE_PATHS_NEW = [
     '../data/diem_thi_2022_new.csv',
     '../data/diem_thi_2023_new.csv',
     '../data/diem_thi_2024_new.csv',
-    '../data/diem_thi_2025_new.csv'
+    # '../data/diem_thi_2025_new.csv'
 ]
 
 # Danh sách tỉnh thành Việt Nam
