@@ -1,3 +1,7 @@
-
 .csv filter=lfs diff=lfs merge=lfs -text
 data/diem_thi_toan_quoc_2024.csv filter=lfs diff=lfs merge=lfs -text
+data/diem_thi_toan_quoc_2023.csv filter=lfs diff=lfs merge=lfs -text
+data/diem_thi_toan_quoc_2022.csv filter=lfs diff=lfs merge=lfs -text
+data/diem_thi_toan_quoc_2021.csv filter=lfs diff=lfs merge=lfs -text
+data/diem_thi_toan_quoc_2020.csv filter=lfs diff=lfs merge=lfs -text
+data/diem_thi_toan_quoc_2019.csv filter=lfs diff=lfs merge=lfs -text
