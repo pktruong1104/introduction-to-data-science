@@ -220,7 +220,7 @@ def draw_dual_heatmap(gdf_year: gpd.GeoDataFrame, year: int, output_dir: Path):
         ax=ax2,                  # Vẽ trên ô đồ thị thứ hai
         missing_kwds={'color': 'lightgrey'}
     )
-    label_top_n(gdf_year, ax2,  'So_luong_liet', n=7,color='black')
+    label_top_n(gdf_year, ax2,  'Ty_le_liet_TH1', n=7,color='black')
     ax2.set_title(f'Năm {year}: Tỷ Lệ Thí Sinh Bị Điểm Liệt (%)', fontsize=16)
     ax2.axis('off') 
     ax2.invert_yaxis()
