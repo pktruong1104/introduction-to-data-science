@@ -14,7 +14,7 @@ def standarlize_geojson_id(geojson_path: Path, csv_path: Path):
     df_new = df_csv[['TEN_TINH', 'MA_TINH']]
 
     # lấy cột trong json 
-    TEN_COL_JSON = 'name'
+    TEN_COL_JSON = 'ten_tinh'
     TEN_COL_CSV = 'TEN_TINH'
 
     gdf_merged = gdf.merge(
@@ -24,14 +24,14 @@ def standarlize_geojson_id(geojson_path: Path, csv_path: Path):
         how='left'
     )
 
-    gdf_merged['id'] = gdf_merged['MA_TINH'].combine_first(gdf_merged['id'])
+    gdf_merged['gid'] = gdf_merged['MA_TINH'].combine_first(gdf_merged['gid'])
     gdf_final = gdf_merged.drop(columns=['TEN_TINH'])
     gdf_final['MA_TINH'] = gdf_final['MA_TINH'].fillna(0).astype(int)
 
-    gdf_final = gdf_final.set_index('id')
-    gdf_final.index.name = 'id'
+    gdf_final = gdf_final.set_index('gid')
+    gdf_final.index.name = 'gid'
 
-    gdf_final.to_file("vn_new.json", driver="GeoJSON")
+    gdf_final.to_file("../data/vn_new.json", driver="GeoJSON")
     print("Đã lưu GeoJSON mới với ID đã cập nhật thành công!")
 
 # ============================================ XỬ LÍ LẠI DỮ LIỆU THÍ SINH ===================================
@@ -154,13 +154,29 @@ def calculate_heatmap_stats_by_tinh(df_raw, config_path, nguong_diem_liet=1.0, n
     return df_total_by_tinh
 
 # ========================================= VẼ BẢN ĐỒ NHIỆT ====================================
+# ========================================= Hàm thêm tên ======================================
+def label_top_n(gdf, ax, value_col, n=7, color='black'):
+    top = gdf.sort_values(by=value_col, ascending=False).head(n)
+    for _, row in top.iterrows():
+        p = row.geometry.representative_point()
+        ax.annotate(
+            text=row['ten_tinh'],
+            xy=(p.x, p.y),
+            fontsize=8,
+            fontweight='bold',
+            color=color,
+            ha='center',
+            va='center'
+        )
+
+
 def draw_dual_heatmap(gdf_year: gpd.GeoDataFrame, year: int, output_dir: Path):
     """
     Vẽ hai bản đồ nhiệt (Số lượng và Tỷ lệ) cạnh nhau cho dữ liệu điểm liệt.
     """
     
     # Kiểm tra các cột cần thiết có tồn tại không
-    required_cols = ['So_luong_liet_ca_2', 'Ty_le_liet_TH2']
+    required_cols = ['So_luong_liet', 'Ty_le_liet_TH1']
     if not all(col in gdf_year.columns for col in required_cols):
         print("LỖI: GeoDataFrame thiếu các cột thống kê cần thiết (So_luong_liet hoặc Ty_le_liet).")
         return
@@ -173,40 +189,46 @@ def draw_dual_heatmap(gdf_year: gpd.GeoDataFrame, year: int, output_dir: Path):
     # ----------------------------------------------------
     ax1 = axes[0] 
     gdf_year.plot(
-        column='So_luong_liet_ca_2',  # Dữ liệu Số lượng tuyệt đối
+        column='So_luong_liet',  # Dữ liệu Số lượng tuyệt đối
         cmap='Reds',             # Dải màu Đỏ cho thấy quy mô
         linewidth=0.8,
         edgecolor='0.8',
+        vmin = 0, 
+        vmax = 150,
         legend=True,
         legend_kwds={'label': "Số lượng thí sinh điểm liệt", 'orientation': "horizontal"},
         ax=ax1,                  # Vẽ trên ô đồ thị thứ nhất
         missing_kwds={'color': 'lightgrey'} 
     )
+    label_top_n(gdf_year, ax1,  'So_luong_liet', n=7,color='black')
     ax1.set_title(f'Năm {year}: Số Lượng Thí Sinh Bị Điểm Liệt', fontsize=16)
     ax1.axis('off') # Ẩn trục tọa độ
-    
+    ax1.invert_yaxis()
     # ----------------------------------------------------
     # 2. BẢN ĐỒ THỂ HIỆN TỶ LỆ (Rate/Percentage)
     # ----------------------------------------------------
     ax2 = axes[1] 
     gdf_year.plot(
-        column='Ty_le_liet_TH2',     # Dữ liệu Tỷ lệ phần trăm
+        column='Ty_le_liet_TH1',     # Dữ liệu Tỷ lệ phần trăm
         cmap='OrRd',             # Dải màu Cam-Đỏ cho thấy cường độ/chất lượng
         linewidth=0.8,
         edgecolor='0.8',
+        vmin = 0, 
+        vmax = 0.35,
         legend=True,
         legend_kwds={'label': "Tỷ lệ thí sinh điểm liệt (%)", 'orientation': "horizontal"},
         ax=ax2,                  # Vẽ trên ô đồ thị thứ hai
         missing_kwds={'color': 'lightgrey'}
     )
+    label_top_n(gdf_year, ax2,  'So_luong_liet', n=7,color='black')
     ax2.set_title(f'Năm {year}: Tỷ Lệ Thí Sinh Bị Điểm Liệt (%)', fontsize=16)
     ax2.axis('off') 
-    
+    ax2.invert_yaxis()
     plt.suptitle(f'Bản đồ Nhiệt So Sánh Điểm Liệt Kỳ Thi THPT Quốc Gia Năm {year}', fontsize=20, y=0.95) 
 
     # Lưu hình ảnh
     output_file = output_dir / f"heatmap_dual_{year}.png"
-    plt.savefig(output_file, dpi=300)
+    fig.savefig(output_file, dpi=300)
     plt.close(fig)
     print(f"ĐÃ LƯU BẢN ĐỒ KÉP: {output_file.name}")
 
@@ -281,8 +303,8 @@ def run_full_analysis_and_draw(year: int, data_file_path: Path, config_file_path
     
     # Chuẩn hóa dữ liệu sau gộp (Điền 0 cho các tỉnh thiếu dữ liệu)
     # Vẽ cho trường hợp 2 
-    gdf_year['So_luong_liet_ca_2'] = gdf_year['So_luong_liet_ca_2'].fillna(0)
-    gdf_year['Ty_le_liet_TH2'] = gdf_year['Ty_le_liet_TH2'].fillna(0)
+    gdf_year['So_luong_liet'] = gdf_year['So_luong_liet'].fillna(0)
+    gdf_year['Ty_le_liet_TH1'] = gdf_year['Ty_le_liet_TH1'].fillna(0)
     # (Bạn có thể thêm các cột tổ hợp nếu muốn vẽ bản đồ tổ hợp)
     
     print("Đã gộp dữ liệu thống kê vào bản đồ thành công.")
