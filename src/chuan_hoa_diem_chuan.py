@@ -190,22 +190,22 @@ def apply_major_khoi(df):
             if len(khoi_list) > 1:
                 if base_major not in used_codes:
                     used_codes[base_major] = 1
-                    new_code = f"{base_major}_1"
+                    new_code = f"{base_major}*1"
                 else:
                     used_codes[base_major] += 1
-                    new_code = f"{base_major}_{used_codes[base_major]}"
+                    new_code = f"{base_major}*{used_codes[base_major]}"
 
             # Nếu chỉ 1 khối → thêm đuôi khối, tránh trùng
             else:
                 khoi = khoi_list[0]
-                base_code = f"{base_major}_{khoi}"
+                base_code = f"{base_major}*{khoi}"
 
                 if base_code not in used_codes:
                     used_codes[base_code] = 0
                     new_code = base_code
                 else:
                     used_codes[base_code] += 1
-                    new_code = f"{base_code}_{used_codes[base_code]}"
+                    new_code = f"{base_code}*{used_codes[base_code]}"
 
             # Tạo dòng kết quả
             new_row = r.to_dict()
