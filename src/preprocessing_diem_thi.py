@@ -94,70 +94,103 @@ output_dir = "../data/"
 load_dotenv()
 MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
 
-def geocode_province(province_name, token):
+def geocode_province(province_name, token, *, session=None, timeout=10, debug=False):
     """
-    Lấy tọa độ của tỉnh thành từ Mapbox Geocoding API
+    Lấy tọa độ tỉnh/thành từ Mapbox Geocoding API (KHÔNG in token).
+    Trả về (lat, lon) hoặc (None, None)
     """
-    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{province_name}, Vietnam.json"
-    params = {
-        'access_token': token,
-        'country': 'VN',
-        'types': 'region,place',
-        'limit': 1
-    }
-    
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        data = response.json()
-        
-        if data['features']:
-            coordinates = data['features'][0]['center']
-            # làm tròn 
-            longitude = round(coordinates[0], 4)
-            latitude = round(coordinates[1], 4)
-            return latitude, longitude
-        else:
-            print(f"Không tìm thấy tọa độ cho: {province_name}")
-            return None, None
-            
-    except requests.exceptions.RequestException as e:
-        print(f"Lỗi khi lấy tọa độ cho {province_name}: {e}")
+    # Chặn trường hợp truyền nhầm list/dict vào đây
+    if not isinstance(province_name, str):
+        if debug:
+            print(f"[geocode_province] province_name phải là string, nhận {type(province_name)}")
         return None, None
 
-def crawl_province():
+    province_name = province_name.strip()
+    if not province_name:
+        return None, None
+
+    # Encode query cho an toàn
+    query = quote(f"{province_name}, Vietnam")
+    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{query}.json"
+
+    params = {
+        "access_token": token,
+        "country": "VN",
+        "types": "region,place",
+        "limit": 1,
+    }
+
+    sess = session or requests
+
+    try:
+        r = sess.get(url, params=params, timeout=timeout)
+        r.raise_for_status()
+        data = r.json()
+
+        features = data.get("features") or []
+        if not features:
+            if debug:
+                print(f"Không tìm thấy tọa độ cho: {province_name}")
+            return None, None
+
+        lon, lat = features[0]["center"]
+        return round(lat, 4), round(lon, 4)
+
+    except requests.exceptions.HTTPError as e:
+        # KHÔNG print(e) vì e chứa full URL -> lộ token
+        status = getattr(e.response, "status_code", None)
+        if debug:
+            print(f"Lỗi HTTP khi lấy tọa độ cho {province_name} (status={status})")
+        return None, None
+
+    except requests.exceptions.RequestException as e:
+        # KHÔNG print(e) vì có thể chứa URL
+        if debug:
+            print(f"Lỗi mạng khi lấy tọa độ cho {province_name}: {type(e).__name__}")
+        return None, None
+
+
+def crawl_province(provinces, mapbox_token, output_dir, *, sleep_sec=0.1, debug=False):
     results = []
-    
+
     print("Bắt đầu lấy tọa độ các tỉnh thành Việt Nam...")
     print("-" * 60)
-    
-    for i, province in enumerate(provinces, 1):
-        print(f"[{i}/{len(provinces)}] Đang lấy: {province['name']}: ", end=' ')
-        
-        latitude, longitude = geocode_province(province['name'], MAPBOX_TOKEN)
-        
-        if latitude and longitude:
-            results.append({
-                'MA_TINH': province['code'],
-                'TEN_TINH': province['name'],
-                'VI_DO': latitude,
-                'KINH_DO': longitude
-            })
-            print(f" ({latitude}, {longitude})")
-        else:
-            print(" Thất bại")
-        
-        # Delay để tránh rate limit
-        time.sleep(0.1)
-    
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    with requests.Session() as session:
+        for i, province in enumerate(provinces, 1):
+            name = province.get("name")
+            code = province.get("code")
+
+            print(f"[{i}/{len(provinces)}] Đang lấy: {name}: ", end="")
+
+            lat, lon = geocode_province(
+                name, mapbox_token, session=session, debug=debug
+            )
+
+            if lat is not None and lon is not None:
+                results.append({
+                    "MA_TINH": code,
+                    "TEN_TINH": name,
+                    "VI_DO": lat,
+                    "KINH_DO": lon,
+                })
+                print(f"({lat}, {lon})")
+            else:
+                print("Thất bại")
+
+            time.sleep(sleep_sec)
+
     print("-" * 60)
     print(f"Hoàn thành! Đã lấy được {len(results)}/{len(provinces)} tỉnh thành")
-    df = pd.DataFrame(results)
 
-    # Ghi ra file CSV
-    output_file = os.path.join(output_dir, f"province.csv")
-    df.to_csv(output_file, index=False, encoding='utf-8-sig')
-    print(f"Ghi vào file .csv thành công")
+    df = pd.DataFrame(results)
+    output_file = os.path.join(output_dir, "province.csv")
+    df.to_csv(output_file, index=False, encoding="utf-8-sig")
+    print(f"Ghi vào file .csv thành công: {output_file}")
+
+    return df
 
 # =================== TẠO GRID CHO TỈNH =====================
 def create_grid_table(pd_province):
